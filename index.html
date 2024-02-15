@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Nutrition Dashbaord</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                <a href="index.html">
+                    <img src="images/home-icon.png" class="home-icon" alt="Home Icon">
+                </a>
+                <div class="search">
+                    <h2 class="main-title">Dashbaord</h2>
+                    <img src="images/info-icon.png" class="info-icon" alt="Info Icon" onclick="openInfoPopup()">
+                <div id="info-popup" class="info-popup">
+                    <p>The Nutrition API</p>
+                    <p>API Ninjas</p>
+                    <p>"The Nutrition API extracts nutrition information from text using natural language processing.
+                        From food blogs to menus to recipes, it can read any text and calculate the corresponding nutrition data.
+                        <br>An intelligent feature of this API is custom portioning:
+                        if your text specifies quantities of individual food items or ingredients,
+                        the algorithm will automatically scale the nutrition data in the result accordingly."</p>
+                    <button class="btn" id="close-button" onclick="closeInfoPopup()"><span>Close</span></button>
+                    </div>
+                </div>
+                <div class="user">
+                    <a href="#" class="btn" id="goals-button" onclick="openPopup()"><span>Set/Change Goals</span></a>
+                    <a href="#" class="btn" id="reset-button" onclick="openResetConfirmation()"><span>&nbsp New Day &nbsp</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="cards" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="card1">
+                <div class="card" draggable="true" ondragstart="drag(event)">
+                    <div class="box">
+                        <h3 class="card-titles">Calories</h3><br>
+                        <h1 id="calories-value">g</h1>
+                        <h1 class="card-max-values" id="calories-max"></h1>
+                    </div>
+                    <div class="icon" id="calories-icon">
+                        <img src="images/calories-icon.png" alt="Calories Icon">
+                      </div>
+                    <div class="chart-container">
+                    <canvas id="chart-calories" width="100" height="100"></canvas>
+                </div>
+                <div class="card-line calories"></div>
+                </div>
+            </div>
+            </div>
+            <div class="card2">
+                <div class="card" draggable="true" ondragstart="drag(event)">
+                    <div class="box">
+                        <h3 class="card-titles">Protein</h3><br>
+                        <h1 id="protein-value">g</h1>
+                        <h1 class="card-max-values" id="protein-max"></h1> 
+                    </div>
+                    <div class="icon" id="protein-icon">
+                        <img src="images/protein-icon.png" alt="Protein Icon">
+                      </div>
+                    <div class="chart-container">
+                    <canvas id="chart-protein" width="100" height="100"></canvas>
+                </div>
+                <div class="card-line protein"></div>
+                </div>
+            </div>
+                <div class="card3">
+                <div class="card" draggable="true" ondragstart="drag(event)">
+                    <div class="box">
+                        <h3 class="card-titles">Fats</h3><br>
+                        <h1 id="fats-value">g</h1>
+                        <h1 class="card-max-values" id="fats-max"></h1> 
+                    </div>
+                    <div class="icon" id="fats-icon">
+                        <img src="images/fats-icon.png" alt="Fats Icon">
+                      </div>
+                    <div class="chart-container">
+                    <canvas id="chart-fats" width="100" height="100">
+                </div>
+                <div class="card-line fats"></div>
+                </div>
+                </div>
+                <div class="card4">
+                <div class="card" draggable="true" ondragstart="drag(event)">
+                    <div class="box">
+                        <h3 class="card-titles">Carbs</h3><br>
+                        <h1 id="carbs-value">g</h1>
+                        <h1 class="card-max-values" id="carbs-max"></h1> 
+                    </div>
+                    <div class="icon" id="carbs-icon">
+                        <img src="images/carbs-icon.png" alt="Carbs Icon">
+                      </div>
+                    <div class="chart-container">
+                    <canvas id="chart-carbs" width="100" height="100"></canvas>
+                </div>
+                <div class="card-line carbs"></div>
+                </div>
+                </div>
+                <div class="card5">
+                <div class="card" draggable="true" ondragstart="drag(event)">
+                    <div class="box">
+                        <h3 class="card-titles">Sugar</h3><br>
+                        <h1 id="sugar-value">g</h1>
+                        <h1 class="card-max-values" id="sugar-max"></h1> 
+                    </div>
+                    <div class="icon" id="sugar-icon">
+                        <img src="images/sugar-icon.png" alt="Sugar Icon">
+                      </div>
+                    <div class="chart-container">
+                    <canvas id="chart-sugar" width="100" height="100"></canvas>
+                </div>
+                <div class="card-line sugar"></div>
+                </div>
+                </div>
+                <div class="card6">
+                <div class="card" draggable="true" ondragstart="drag(event)">
+                    <div class="box">
+                        <h3 class="card-titles">Fiber</h3><br>
+                        <h1 id="fiber-value">g</h1>
+                        <h1 class="card-max-values" id="fiber-max"></h1> 
+                    </div>
+                    <div class="icon" id="fiber-icon">
+                        <img src="images/fiber-icon.png" alt="Fiber Icon">
+                      </div>
+                    <div class="chart-container">
+                    <canvas id="chart-fiber" width="100" height="100"></canvas>
+                </div>
+                <div class="card-line fiber"></div>
+                </div>
+            </div>
+
+            <div class="content-2">
+
+                <div class="recent-entries">
+                    <div class="title">
+                        <h2>Recent Entries</h2>
+                    </div>
+                    <div id="recentEntriesList"></div>
+                </div>
+                <div class="search-food">
+                    <div class="title">
+                        <h2>Search For Food</h2>
+                    </div> 
+                    <p class="search-food-text">Search food from a <a href="https://api-ninjas.com/api/nutrition" class="underline-text1" target="_blank">nutrition database</a>.</p> 
+                    <br>
+                    <label for="food-input" id="food-input-title">Food Name:</label>
+                    <input type="text" id="food-input" name="food" placeholder="Enter food name..." required>
+                    <button class="btn" id="search-btn"><span>Search</span></button>
+                    <div class="food-search-list" id="food-details"></div>
+                </div>
+                <div class="add-new">
+                    <div class="title">
+                        <h2>Add New Food</h2>
+                    </div><p class="add-food-text">If you prefer not to add something, leave the field blank.</p>
+                    <br>
+                    <form action="#" method="post" onsubmit="handleSubmit(event)">
+                        <div style="display: flex;">
+                            <div class="form-group">
+                                <label for="name-input" class="required-label">Food Name:</label>
+                                <input type="text" id="name-input" name="name" placeholder="Enter name..." maxlength="20" required>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="serving-size-input">Serving Size (g):</label>
+                                <input type="number" id="serving-size-input" name="serving-size" placeholder="Enter serving size (g)..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
+                            </div>
+                        </div>
+
+                        <div style="display: flex;">
+                            <div class="form-group">
+                                <label for="calories-input">Calories:</label>
+                                <input type="number" id="calories-input" name="calories" placeholder="Enter calories..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="protein-input">Protein:</label>
+                                <input type="number" id="protein-input" name="protein" placeholder="Enter protein..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
+                            </div>
+                        </div>
+                    
+                        <div style="display: flex;">
+                            <div class="form-group">
+                                <label for="fats-input">Fats:</label>
+                                <input type="number" id="fats-input" name="fats" placeholder="Enter fats..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="carbs-input">Carbs:</label>
+                                <input type="number" id="carbs-input" name="carbs" placeholder="Enter carbs..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
+                            </div>
+                        </div>
+                    
+                        <div style="display: flex;">
+                            <div class="form-group">
+                                <label for="sugar-input">Sugar:</label>
+                                <input type="number" id="sugar-input" name="sugar" placeholder="Enter sugar..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="fiber-input">Fiber:</label>
+                                <input type="number" id="fiber-input" name="fiber" placeholder="Enter fiber..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
+                            </div>
+                        </div>
+                        <button class="btn" id="submit-button" type="submit"><span>Add Food</span></button>
+                    </form>
+                </div>     
+                
+<div id="popup" class="popup">
+    <span class="close" onclick="closePopup()">&times;</span>
+    <h2>Set Your Daily Macro Targets</h2><br>
+    <p>If you prefer not to track something, set its value as 0.</p>
+    <br>
+    <form action="#" method="post" onsubmit="handleSubmit(event)">
+        <div style="display: flex;">
+            <div class="form-group">
+                <label for="calories-max-input">Calories:</label>
+                <input type="number" id="calories-max-input" name="calories-max" placeholder="Enter calories..." required>
+            </div>
+    
+            <div class="form-group">
+                <label for="protein-max-input">Protein:</label>
+                <input type="number" id="protein-max-input" name="protein-max" placeholder="Enter protein..." required>
+            </div>
+        </div>
+    
+        <div style="display: flex;">
+            <div class="form-group">
+                <label for="fats-max-input">Fats:</label>
+                <input type="number" id="fats-max-input" name="fats-max" placeholder="Enter fats..." required>
+            </div>
+    
+            <div class="form-group">
+                <label for="carbs-max-input">Carbs:</label>
+                <input type="number" id="carbs-max-input" name="carbs-max" placeholder="Enter carbs..." required>
+            </div>
+        </div>
+    
+        <div style="display: flex;">
+            <div class="form-group">
+                <label for="sugar-max-input">Sugar:</label>
+                <input type="number" id="sugar-max-input" name="sugar-max" placeholder="Enter sugar..." required>
+            </div>
+    
+            <div class="form-group">
+                <label for="fiber-max-input">Fiber:</label>
+                <input type="number" id="fiber-max-input" name="fiber-max" placeholder="Enter fiber..." required>
+            </div>
+        </div>
+    
+        <button class="btn" id="apply-button" type="submit" ><span>Apply</span></button>
+    </form>
+</div>
+<div id="confirmationBox" class="confirmation-box">
+    <div class="confirmation-content">
+        <h2 id="confirmationTitle"></h2>
+        <br>
+        <p>Are you sure you want to delete this entry?</p>
+        <div class="confirmation-buttons">
+            <button class="btn" id="reset-button3" onclick="confirmDeleteEntry()"><span>Yes</span></button>
+            <button class="btn" id="reset-button4" onclick="closeConfirmationBox()"><span>No</span></button>
+        </div>
+    </div>
+</div>
+        <div id="resetConfirmation" class="popup">
+            <span class="close" onclick="closeResetConfirmation()">&times;</span>
+            <h2>New Day Confirmation</h2>
+            <br>
+            <div class="new-day-popup-text">Are you sure you want to start a new day? </div>
+            <p class="new-day-popup-space"> This will reset the data from your previous day. 
+            </p>
+            <br>
+            <button class="btn" id="reset-button2" onclick="resetValues()"><span>Reset</span></button>
+        </div>
+    </div>
+</body>
+<footer>
+    <div class="footer-content">
+        <p></p>
+        <ul>
+            <li><a href="https://api-ninjas.com/api/nutrition" target="_blank">Nutrition API</a></li>
+            <li><a href="mailto:jameskyprianou@gmail.com">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Website. All rights reserved.</p>
+    </div>
+</footer>
+<script src="script.js"></script>
+</html>
