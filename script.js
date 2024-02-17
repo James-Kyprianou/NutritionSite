@@ -158,6 +158,19 @@ document.addEventListener('dragover', dragOver);
 // Call the function to load the card order when the page is loaded
 window.addEventListener('load', loadCardOrder);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Define macros
 const macros = ["calories", "protein", "fats", "carbs", "sugar", "fiber"];
 
@@ -168,7 +181,7 @@ macros.forEach((macroName, index) => {
 
     // Define colors for each chart
     const chartColors = ['#ff9f40', '#ff6384', '#ffcd56', '#1BD2F3', '#9966ff', '#38DBAA'];
-    const grayColor = 'rgba(255,255,255,50)'; // Define the color for the gray ring 3B4A72
+    const grayColor = '#3E5488'; // Define the color for the gray ring 3B4A72
 
     // Doughnut chart configuration
     const data = {
@@ -184,7 +197,7 @@ macros.forEach((macroName, index) => {
         type: 'doughnut',
         data: data,
         options: {
-            cutout: '90%', // Adjust the cutout to create the inner ring
+            cutout: '85%', // Adjust the cutout to create the inner ring
             plugins: {
                 legend: {
                     display: false
@@ -251,6 +264,7 @@ function updateCharts() {
 function resetValues() {
     // Reset all card values to 0g
     const macros = ["calories", "protein", "fats", "carbs", "sugar", "fiber"];
+    
     macros.forEach(macroName => {
         document.getElementById(macroName + "-value").textContent = "0g";
         localStorage.setItem(macroName, "0");
@@ -283,6 +297,17 @@ function updateCardAndStorage(macroName, value) {
     localStorage.setItem(macroName, newValue.toString());
 }
 
+// Set default max values for calories, protein, fats, carbs, sugar, and fiber
+const defaultMaxValues = {
+    calories: 2100,
+    protein: 80,
+    fats: 50,
+    carbs: 250,
+    sugar: 30,
+    fiber: 30
+};
+
+// Function to load values from localStorage or set default values if not present
 function loadValuesFromStorage() {
     const macros = ["calories", "protein", "fats", "carbs", "sugar", "fiber"];
     macros.forEach(macroName => {
@@ -290,13 +315,13 @@ function loadValuesFromStorage() {
         document.getElementById(macroName + "-value").textContent = value + "g";
     });
 
-    // Load max values from localStorage and populate the popup form fields
-    document.getElementById("calories-max").textContent = "/" + (parseInt(localStorage.getItem("caloriesMax")) || 0);
-    document.getElementById("protein-max").textContent = "/" + (parseInt(localStorage.getItem("proteinMax")) || 0);
-    document.getElementById("fats-max").textContent = "/" + (parseInt(localStorage.getItem("fatsMax")) || 0);
-    document.getElementById("carbs-max").textContent = "/" + (parseInt(localStorage.getItem("carbsMax")) || 0);
-    document.getElementById("sugar-max").textContent = "/" + (parseInt(localStorage.getItem("sugarMax")) || 0);
-    document.getElementById("fiber-max").textContent = "/" + (parseInt(localStorage.getItem("fiberMax")) || 0);
+    // Load max values from localStorage, or set default values if not present
+    document.getElementById("calories-max").textContent = "/" + (parseInt(localStorage.getItem("caloriesMax")) || defaultMaxValues.calories);
+    document.getElementById("protein-max").textContent = "/" + (parseInt(localStorage.getItem("proteinMax")) || defaultMaxValues.protein);
+    document.getElementById("fats-max").textContent = "/" + (parseInt(localStorage.getItem("fatsMax")) || defaultMaxValues.fats);
+    document.getElementById("carbs-max").textContent = "/" + (parseInt(localStorage.getItem("carbsMax")) || defaultMaxValues.carbs);
+    document.getElementById("sugar-max").textContent = "/" + (parseInt(localStorage.getItem("sugarMax")) || defaultMaxValues.sugar);
+    document.getElementById("fiber-max").textContent = "/" + (parseInt(localStorage.getItem("fiberMax")) || defaultMaxValues.fiber);
 
     // Load entries from localStorage
     let entries = JSON.parse(localStorage.getItem('entries')) || [];
@@ -313,6 +338,8 @@ function loadValuesFromStorage() {
     document.getElementById("sugar-max-input").value = localStorage.getItem("sugarMax") || "";
     document.getElementById("fiber-max-input").value = localStorage.getItem("fiberMax") || "";
 }
+
+
 
 // Call loadValuesFromStorage when the page loads
 window.addEventListener("load", loadValuesFromStorage);
