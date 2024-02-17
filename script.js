@@ -1,3 +1,4 @@
+// cnat add food until a goal is set
 
 function openInfoPopup() {
     var popup = document.getElementById("info-popup");
