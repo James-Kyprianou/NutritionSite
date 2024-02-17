@@ -29,7 +29,7 @@ h3 {
     color: var(--main-text);
 }
 .main-title {
-    font-size: calc(20px + 2vw);
+    font-size: calc(14px + 1.9vw);
     margin-left: 0%;
 }
 .title {
@@ -54,8 +54,8 @@ h3 {
     cursor: pointer;
 }
 .home-icon {
-    width: calc(20px + 2vw);
-    height: calc(20px + 2vw);
+    width: calc(15px + 2vw);
+    height: calc(15px + 2vw);
     transition: all .2s;
     filter: invert(95%);
     margin-right: 20px;
@@ -134,51 +134,17 @@ h3 {
 #goals-button {
     background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
     line-height: calc(11px + 0.4vw);
-    max-width: calc(12px + 8vw);
-    min-width: calc(12px + 8vw);
-    font-size: calc(12px + 0.3vw);
+    max-width: calc(12px + 6.5vw);
+    min-width: calc(12px + 6.5vw);
+    font-size: calc(8px + 0.7vw);
 }
 #reset-button {
     background-image: linear-gradient(144deg,#ffa640, #d37159 50%,rgb(235, 47, 0));
     line-height: calc(11px + 0.4vw);
     max-width: calc(12px + 6vw);
     min-width: calc(12px + 6vw);
-    font-size: calc(6px + 0.8vw);
+    font-size: calc(8px + 0.7vw);
 }
-
-
-
-
-
-@media screen and (max-width: 770px) { 
-
-    .btn span {
-        padding: 7.5px 12px;
-
-       }
-
-       #goals-button {
-        background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-        line-height: calc(11px + 0.4vw);
-        max-width: calc(12px + 15vw);
-        min-width: calc(12px + 15vw);
-        font-size: calc(12px + 0.3vw);
-    }
-    #reset-button {
-        background-image: linear-gradient(144deg,#ffa640, #d37159 50%,rgb(235, 47, 0));
-        line-height: calc(11px + 0.4vw);
-        max-width: calc(12px + 15vw);
-        min-width: calc(12px + 15vw);
-        font-size: calc(6px + 0.8vw);
-    }
-    
-}
-
-
-
-
-
-
 #reset-button2 {
     background-image: linear-gradient(144deg,#ff4640, #d37159 50%,rgb(235, 0, 90));
     line-height: 0.6em;
@@ -562,7 +528,7 @@ a:visited {
 .entries-line {
     opacity: 25%;
 }
-#entry-delete-button {
+.entry-delete-button {
     background-image: linear-gradient(144deg,#ff4040, #d39a59 50%,rgb(235, 47, 0));
     line-height: 0.2em;
     max-width: 10%;
@@ -601,8 +567,8 @@ a:visited {
 
 .confirmation-box {
     display: none;
-    position: fixed;
-    top: 50%;
+    position: absolute;
+    top: 13%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #141b2d;
@@ -667,14 +633,6 @@ a:visited {
     transition: background-color 0.1s ease-out !important;
 }
 
-
-
-
-
-
-
-
-
 /* Add Food */
 .add-food-text {
     margin-left: 10px;
@@ -723,9 +681,10 @@ input[type="submit"] {
 
 .popup {
     display: none;
-    position: fixed;
+    position: relative;
     top: 50%;
     left: 50%;
+
     transform: translate(-50%, -50%);
     background-color: #141b2d;
     box-shadow: #141b2d 0 15px 30px -5px;
@@ -734,6 +693,9 @@ input[type="submit"] {
     border-radius: 15px;
     z-index: 9999;
     color: var(--main-text);
+
+    
+
 }
 .close {
     position: absolute;
@@ -752,6 +714,7 @@ input[type="submit"] {
 .new-day-popup-text {
     font-size: 19px;
 }
+
 
 /* Footer */
 
@@ -869,7 +832,31 @@ footer {
         margin-right: -105px;
     }
 }
+@media screen and (max-width: 1900px) { 
 
+    .btn span {
+        padding: 7.5px 12px;
+
+       }
+
+       #goals-button {
+        background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+        line-height: calc(11px + 0.4vw);
+        max-width: calc(12px + 15vw);
+        min-width: calc(12px + 15vw);
+        margin-right: 15px;
+        font-weight: bold;
+    }
+    #reset-button {
+        background-image: linear-gradient(144deg,#ffa640, #d37159 50%,rgb(235, 47, 0));
+        line-height: calc(11px + 0.4vw);
+        max-width: calc(12px + 15vw);
+        min-width: calc(12px + 15vw);
+        font-weight: bold;
+
+    }
+    
+}
 @media screen and (max-width: 1200px) {
     .chart-container {
         width: calc(60px + 3.5vw);
@@ -982,36 +969,32 @@ footer {
         padding: 0px 0 5px 0px;
         font-size: 18px;
     }
-
-
-
-
-
-
-
 .form-group label {
     font-size: calc(13px + 1vw);
 }
 
-
-
-#entry-delete-button {
+.entry-delete-button {
     margin-left: -1px;
-
-}
-
-
-}
-/*
-@media screen and (max-width: 430px) { 
-    .container .content .cards .card {
-        width: 150px !important;
-        height: 100px !important; 
     }
+
+    .new-day-popup-space {
+        margin: 10px 0 10px 0;
+        color: #bac5df;
+        font-size: 17px;
+    }
+    .new-day-popup-text {
+        font-size: 18px;
+    }
+    
+    .new-day-popup-title {
+        font-size: 23px;
+    }
+
+    .goals-popup-title {
+        font-size: 24px;
+    }
+
 }
-*/
-
-
 
 @media screen and (max-width: 538px) { 
     .container .content .cards .card {
@@ -1025,8 +1008,6 @@ footer {
         height: calc(50px + 13vw);
     }
 }
-
-
 
 @media screen and (max-width: 370px) { 
     .chart-container {
