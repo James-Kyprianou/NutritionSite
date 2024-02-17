@@ -1,5 +1,7 @@
 // cnat add food until a goal is set
 
+
+
 function openInfoPopup() {
     var popup = document.getElementById("info-popup");
     if (popup) {
@@ -374,24 +376,33 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
     entries.unshift(entry); // Add entry to the beginning of the array
     localStorage.setItem('entries', JSON.stringify(entries));
 
-    // Append the entry to the recent entries list
-    const recentEntriesList = document.getElementById("recentEntriesList");
-    const entryDiv = document.createElement("div");
-    entryDiv.classList.add("entry");
-    entryDiv.innerHTML = `
-    <div class="entry1">
-        <h3>${name} (${servingSize}g)&nbsp&nbsp</h3>
-        <p>Calories: <strong id="bold-entries">${calories}g</strong>&nbsp&nbsp</p>
-        <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp&nbsp</p>
-        <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp&nbsp</p>
-        <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp&nbsp</p>
-        <p>Sugar: <strong id="bold-entries">${sugar}g</strong>&nbsp&nbsp</p>
-        <p>Fiber: <strong id="bold-entries">${fiber}g</strong>&nbsp&nbsp</p>
-        <button class="btn" id="entry-delete-button" onclick="deleteEntry(this)"><span>Delete Entry</span></button>
-    </div>
-        <hr class="entries-line">
-    `;
-    recentEntriesList.prepend(entryDiv); // Add entry to the beginning of the list
+// Append the entry to the recent entries list
+const recentEntriesList = document.getElementById("recentEntriesList");
+const entryDiv = document.createElement("div");
+entryDiv.classList.add("entry");
+entryDiv.innerHTML = `
+<div class="entry1">
+    <h3>${name} (${servingSize}g)&nbsp&nbsp</h3>
+    <p>Calories: <strong id="bold-entries">${calories}g</strong>&nbsp&nbsp</p>
+    <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp&nbsp</p>
+    <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp&nbsp</p>
+    <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp&nbsp</p>
+    <p>Sugar: <strong id="bold-entries">${sugar}g</strong>&nbsp&nbsp</p>
+    <p>Fiber: <strong id="bold-entries">${fiber}g</strong>&nbsp&nbsp</p>
+    <button class="btn entry-delete-button" onclick="deleteEntry(this)"><span>Delete Entry</span></button>
+</div>
+<hr class="entries-line">
+`;
+recentEntriesList.prepend(entryDiv); // Add entry to the beginning of the list
+
+// Add event listener to the dynamically generated delete button
+const deleteButtons = document.querySelectorAll('.entry-delete-button');
+deleteButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        // Scroll to the bottom of the page
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+});
 }
 
 // Function to delete an entry
