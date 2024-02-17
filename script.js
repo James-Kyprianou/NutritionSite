@@ -168,14 +168,14 @@ macros.forEach((macroName, index) => {
 
     // Define colors for each chart
     const chartColors = ['#ff9f40', '#ff6384', '#ffcd56', '#1BD2F3', '#9966ff', '#38DBAA'];
-    const grayColor = '#3E5488'; // Define the color for the gray ring 3B4A72
+    const grayColor = '#3E5488'; // Define the color for the gray ring
 
     // Doughnut chart configuration
     const data = {
         labels: [macroName, 'Remaining'],
         datasets: [{
-            data: [value, Math.max(0, maxValue - value)],
-            backgroundColor: [chartColors[index], grayColor], // Set the gray ring color
+            data: [value, Math.max(0, maxValue - value)], // Ensure that the remaining portion is always included
+            backgroundColor: [chartColors[index], grayColor],
             borderWidth: 0
         }]
     };
@@ -207,64 +207,31 @@ function updateCharts() {
         // Get the chart instance
         const chartInstance = Chart.getChart(`chart-${macroName}`);
 
-        // Update chart data
+        // Update chart data to always include both the value and the remaining portion
         chartInstance.data.datasets[0].data = [value, Math.max(0, maxValue - value)];
 
         // Update the chart
         chartInstance.update();
-        
     });
 }
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Initialize the charts with initial data
-    initializeCharts();
-});
 
-function initializeCharts() {
-    // Replace these sample data with your actual initial data
-    var initialData = {
-        calories: 100,
-        protein: 20,
-        fats: 15,
-        carbs: 50,
-        sugar: 10,
-        fiber: 5
-    };
 
-    // Initialize each chart with its initial data
-    initializeChart("chart-calories", initialData.calories);
-    initializeChart("chart-protein", initialData.protein);
-    initializeChart("chart-fats", initialData.fats);
-    initializeChart("chart-carbs", initialData.carbs);
-    initializeChart("chart-sugar", initialData.sugar);
-    initializeChart("chart-fiber", initialData.fiber);
-}
 
-function initializeChart(canvasId, initialValue) {
-    var ctx = document.getElementById(canvasId).getContext('2d');
-    var chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["Value"],
-            datasets: [{
-                label: 'Value',
-                data: [initialValue],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function openPopup() {
         document.getElementById('popup').style.display = 'block';
