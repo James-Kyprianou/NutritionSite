@@ -1,3 +1,4 @@
+
 function openInfoPopup() {
     var popup = document.getElementById("info-popup");
     if (popup) {
@@ -212,6 +213,56 @@ function updateCharts() {
         // Update the chart
         chartInstance.update();
         
+    });
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Initialize the charts with initial data
+    initializeCharts();
+});
+
+function initializeCharts() {
+    // Replace these sample data with your actual initial data
+    var initialData = {
+        calories: 100,
+        protein: 20,
+        fats: 15,
+        carbs: 50,
+        sugar: 10,
+        fiber: 5
+    };
+
+    // Initialize each chart with its initial data
+    initializeChart("chart-calories", initialData.calories);
+    initializeChart("chart-protein", initialData.protein);
+    initializeChart("chart-fats", initialData.fats);
+    initializeChart("chart-carbs", initialData.carbs);
+    initializeChart("chart-sugar", initialData.sugar);
+    initializeChart("chart-fiber", initialData.fiber);
+}
+
+function initializeChart(canvasId, initialValue) {
+    var ctx = document.getElementById(canvasId).getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Value"],
+            datasets: [{
+                label: 'Value',
+                data: [initialValue],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
     });
 }
 
