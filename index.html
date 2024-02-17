@@ -31,8 +31,8 @@
                     </div>
                 </div>
                 <div class="user">
-                    <a href="#" class="btn" id="goals-button" onclick="openPopup()"><span>Set/Change Goals</span></a>
-                    <a href="#" class="btn" id="reset-button" onclick="openResetConfirmation()"><span>&nbsp New Day &nbsp</span></a>
+                    <a href="#" class="btn" id="goals-button" onclick="openPopup()"><span>Set Goals</span></a>
+                    <a href="#" class="btn" id="reset-button" onclick="openResetConfirmation()"><span>New Day</span></a>
                 </div>
             </div>
         </div>
@@ -214,7 +214,7 @@
                 
 <div id="popup" class="popup">
     <span class="close" onclick="closePopup()">&times;</span>
-    <h2>Set Your Daily Macro Targets</h2><br>
+    <h2 class="goals-popup-title">Set Your Daily Macro Targets</h2><br>
     <p>If you prefer not to track something, set its value as 0.</p>
     <br>
     <form action="#" method="post" onsubmit="handleSubmit(event)">
@@ -270,7 +270,7 @@
 </div>
         <div id="resetConfirmation" class="popup">
             <span class="close" onclick="closeResetConfirmation()">&times;</span>
-            <h2>New Day Confirmation</h2>
+            <h2 class="new-day-popup-title">New Day Confirmation</h2>
             <br>
             <div class="new-day-popup-text">Are you sure you want to start a new day? </div>
             <p class="new-day-popup-space"> This will reset the data from your previous day. 
