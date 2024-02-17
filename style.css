@@ -303,13 +303,36 @@ td {
     background: var(--main-background-colour);
 }
 .container .content .cards {
-    padding: 20px 15px;
+    padding: 8px 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    margin-bottom: 25px;
 }
-.container .content .cards .card {
+
+
+/*
+@media screen and (max-width: 770px) { 
+    .cards {
+        margin: 0 0px 0 -40px !important;
+    }
+    .card {
+        margin-left: 50px !important;
+
+    }
+}
+*/
+@media screen and (max-width: 540px) { 
+    .card {
+        
+    }
+}
+
+
+
+
+.container .content .card {
     width: 270px;
     height: 170px;
     background: var(--background-colour);
@@ -517,7 +540,6 @@ a:visited {
     padding-left: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     color: white;
-    padding: 25px;
     padding: 25px;
     transition: transform 0.5s ease; 
     transition: background-color 0.5s ease-in-out;
@@ -860,11 +882,11 @@ footer {
 }
 
 .search-food {
-    order: 1;
+    order: 2;
 }
 
 .add-new {
-    order: 2;
+    order: 1;
 }
 
 .recent-entries {
@@ -936,15 +958,75 @@ footer {
         align-items: flex-start; /* Adjust alignment as needed */
         
     }
+    
     .container .content .cards .card {
-        width: 150px !important; /* Adjust width as needed */
-        height: 100px !important; /* Adjust height as needed */
+        width: calc(100px + 20vw);
+        height: calc(50px + 13vw);
     }
+    /*
+    .container .content .cards .card {
+        width: 180px; 
+        height: 140px; 
+    }*/
     .cards {
         
-        align-items: center;
+       /* align-items: center;*/
+    }
+    .container .content .cards {
+        margin-bottom: -15px;
+    }
+    .recent-entries {
+        margin-top: 25px !important;
+    }
+    .food-search-list {
+        padding: 0px 0 5px 0px;
+        font-size: 18px;
+    }
+
+
+
+
+
+
+
+.form-group label {
+    font-size: calc(13px + 1vw);
+}
+
+
+
+#entry-delete-button {
+    margin-left: -1px;
+
+}
+
+
+}
+/*
+@media screen and (max-width: 430px) { 
+    .container .content .cards .card {
+        width: 150px !important;
+        height: 100px !important; 
     }
 }
+*/
+
+
+
+@media screen and (max-width: 538px) { 
+    .container .content .cards .card {
+        width: calc(100px + 18vw);
+        height: calc(50px + 13vw);
+    }
+}
+@media screen and (max-width: 422px) { 
+    .container .content .cards .card {
+        width: calc(100px + 13vw);
+        height: calc(50px + 13vw);
+    }
+}
+
+
 
 @media screen and (max-width: 370px) { 
     .chart-container {
