@@ -174,12 +174,8 @@ macros.forEach((macroName, index) => {
     const data = {
         labels: [macroName, 'Remaining'],
         datasets: [{
-            data: [maxValue, 0], // Full gray ring as background
-            backgroundColor: [grayColor],
-            borderWidth: 0
-        }, {
             data: [value, Math.max(0, maxValue - value)],
-            backgroundColor: [chartColors[index], 'transparent'],
+            backgroundColor: [chartColors[index], grayColor],
             borderWidth: 0
         }]
     };
@@ -188,7 +184,7 @@ macros.forEach((macroName, index) => {
         type: 'doughnut',
         data: data,
         options: {
-            cutout: '80%',
+            cutout: '90%', // Adjust the cutout to create the inner ring
             plugins: {
                 legend: {
                     display: false
@@ -212,7 +208,7 @@ function updateCharts() {
         const chartInstance = Chart.getChart(`chart-${macroName}`);
 
         // Update chart data
-        chartInstance.data.datasets[1].data = [value, Math.max(0, maxValue - value)];
+        chartInstance.data.datasets[0].data = [value, Math.max(0, maxValue - value)];
 
         // Update the chart
         chartInstance.update();
