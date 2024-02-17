@@ -170,15 +170,16 @@ macros.forEach((macroName, index) => {
     const chartColors = ['#ff9f40', '#ff6384', '#ffcd56', '#1BD2F3', '#9966ff', '#38DBAA'];
     const grayColor = '#3E5488'; // Define the color for the gray ring 3B4A72
 
-    // Calculate the remaining value with a minimum of 0
-    const remainingValue = Math.max(0, maxValue - value);
-
     // Doughnut chart configuration
     const data = {
         labels: [macroName, 'Remaining'],
         datasets: [{
-            data: [value, remainingValue],
-            backgroundColor: [chartColors[index], grayColor], // Set the gray ring color
+            data: [maxValue, 0], // Full gray ring as background
+            backgroundColor: [grayColor],
+            borderWidth: 0
+        }, {
+            data: [value, Math.max(0, maxValue - value)],
+            backgroundColor: [chartColors[index], 'transparent'],
             borderWidth: 0
         }]
     };
@@ -210,15 +211,11 @@ function updateCharts() {
         // Get the chart instance
         const chartInstance = Chart.getChart(`chart-${macroName}`);
 
-        // Calculate the remaining value with a minimum of 0
-        const remainingValue = Math.max(0, maxValue - value);
-
         // Update chart data
-        chartInstance.data.datasets[0].data = [value, remainingValue];
+        chartInstance.data.datasets[1].data = [value, Math.max(0, maxValue - value)];
 
         // Update the chart
         chartInstance.update();
-        
     });
 }
 
