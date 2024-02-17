@@ -1,4 +1,3 @@
-
 function openInfoPopup() {
     var popup = document.getElementById("info-popup");
     if (popup) {
