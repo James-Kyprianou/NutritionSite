@@ -184,7 +184,7 @@ macros.forEach((macroName, index) => {
         type: 'doughnut',
         data: data,
         options: {
-            cutout: '90%', // Adjust the cutout to create the inner ring
+            cutout: '70%', // Adjust the cutout to create the inner ring
             plugins: {
                 legend: {
                     display: false
@@ -196,6 +196,17 @@ macros.forEach((macroName, index) => {
     // Create and render the chart
     const ctx = document.getElementById(`chart-${macroName}`).getContext('2d');
     new Chart(ctx, config);
+
+    // Draw the second ring (gray ring) manually
+    const centerX = ctx.canvas.width / 2;
+    const centerY = ctx.canvas.height / 2;
+    const radius = Math.min(ctx.canvas.width, ctx.canvas.height) / 2;
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius * 0.7, 0, 2 * Math.PI);
+    ctx.strokeStyle = grayColor;
+    ctx.lineWidth = 20; // Adjust the thickness of the gray ring as needed
+    ctx.stroke();
 });
 
 // Function to update the chart data and render the updated chart
@@ -214,9 +225,6 @@ function updateCharts() {
         chartInstance.update();
     });
 }
-
-
-
 
 
 
