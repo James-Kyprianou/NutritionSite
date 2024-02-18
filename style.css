@@ -565,10 +565,11 @@ a:visited {
 
 
 
+
 .confirmation-box {
     display: none;
-    position: absolute;
-    top: 13%;
+    position: fixed;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #141b2d;
@@ -681,19 +682,17 @@ input[type="submit"] {
 
 .popup {
     display: none;
-    position: relative;
+    position: fixed;
     top: 50%;
     left: 50%;
-
     transform: translate(-50%, -50%);
     background-color: #141b2d;
     box-shadow: #141b2d 0 15px 30px -5px;
-    padding: 30px 50px 30px 30px;
+    padding: 20px;
     border: 1px solid #4d5281;
     border-radius: 15px;
     z-index: 9999;
     color: var(--main-text);
-
     
 
 }
