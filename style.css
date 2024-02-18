@@ -79,7 +79,7 @@ h3 {
     z-index: 9999;
     color: var(--main-text);
 }
-.btn {
+.btn, .btn2 {
     align-items: center;
     background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
     border: 0;
@@ -109,7 +109,7 @@ h3 {
  transform: scale(1.05);
 }
 
-.btn span {
+.btn span, .btn2  span {
  background-color: rgb(5, 6, 45);
  padding: 16px 24px;
  border-radius: 6px;
@@ -117,6 +117,21 @@ h3 {
  height: 100%;
  transition: 300ms;
 }
+.btn2 span {
+    padding: 16px 5.5px;
+}
+   
+
+
+
+
+
+
+
+
+
+
+
 
 .btn:hover span {
  background: none;
@@ -147,7 +162,7 @@ h3 {
 }
 #reset-button2 {
     background-image: linear-gradient(144deg,#ff4640, #d37159 50%,rgb(235, 0, 90));
-    line-height: 0.6em;
+    line-height: 0.3em;
 }
 #reset-button3 {
     background-image: linear-gradient(144deg,#ff4069, #d39059 50%,rgb(235, 0, 90));
@@ -691,8 +706,7 @@ input[type="submit"] {
     border-radius: 15px;
     z-index: 9999;
     color: var(--main-text);
-    
-
+    width: calc(200px + 30vw) !important;
 }
 .close {
     position: absolute;
@@ -849,29 +863,23 @@ footer {
 
 
 @media screen and (max-width: 1900px) { 
-
-    .btn span {
-        padding: 7.5px 12px;
-
-       }
-
        #goals-button {
         background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
         line-height: calc(11px + 0.4vw);
         max-width: calc(12px + 15vw);
-        min-width: calc(12px + 15vw);
+      
         margin-right: 15px;
         font-weight: bold;
+        margin: 7.5px 12px;
     }
     #reset-button {
         background-image: linear-gradient(144deg,#ffa640, #d37159 50%,rgb(235, 47, 0));
         line-height: calc(11px + 0.4vw);
         max-width: calc(12px + 15vw);
-        min-width: calc(12px + 15vw);
+      
         font-weight: bold;
-
+        margin: 7.5px 12px;
     }
-    
 }
 @media screen and (max-width: 1200px) {
     .recent-entries {
@@ -1087,7 +1095,13 @@ footer {
 @media screen and (max-width: 1050px) {
     .side-menu li {
         font-size: 18px;
-    }
+    }/*
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        padding: 20px;
+    }*/
 }
 @media screen and (max-width: 940px) {
     .side-menu li span {
@@ -1112,6 +1126,15 @@ footer {
     }
 }
 @media screen and (max-width:536px) {
+    #goals-button {
+        font-size: 12px;
+        margin: 0px 12px;
+    }
+    #reset-button {
+        font-size: 12px;
+        margin: 7.5px 0px;
+    }
+
     .calories-icon {
         top: 13px; 
         left: calc(18px + 4.5vw);
