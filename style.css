@@ -378,8 +378,27 @@ td {
     background-color: #38DBAA; /* Pink color for fiber */
 }
 .chart-container {
+    position: relative;
     width: calc(60px + 2.5vw);
     height: calc(60px + 2.5vw);
+}
+/*margin: -80px 0px 0px 28px !important;*//*margin: -80px 0px 0px 28px !important;*//*margin: -80px 0px 0px 28px !important;*//*margin: -80px 0px 0px 28px !important;*/
+.chart-icon, .calories-icon {
+    position: absolute;
+    height: auto;
+    z-index: 1;
+}
+.calories-icon {
+    top: 28px; 
+    left: 34px; 
+    width: 40px; 
+   /* margin: 21px 0 0 27px !important;*/
+}
+.chart-icon {
+    top: 30px;  
+    left: 30px; 
+    width: 50px;
+    /*margin: -80px 0px 0px 28px !important;*/
 }
 .chart-canvas {
     width: 100%;
@@ -882,6 +901,17 @@ footer {
 
 @media screen and (max-width: 770px) { 
 
+    .calories-icon {
+        top: 18px; 
+        left: calc(10px + 4.5vw);
+        width: 26px; 
+    }
+    .chart-icon {
+        top: 20px;  
+        left: 40px; 
+        width: 36px;
+    }
+
     .container .content .cards {
         justify-content: space-evenly;
     }
@@ -913,7 +943,7 @@ footer {
     .chart-container {
         width: calc(60px + 4.5vw);
         height: calc(60px + 4.5vw);
-        margin-left: 60px;
+        margin-left: -60px;
         margin-top: 20px;
     }
     #calories-value, #protein-value, #fats-value, #carbs-value, #sugar-value, #fiber-value {
@@ -1028,14 +1058,15 @@ footer {
     .chart-container {
         width: 70px !important;
         height: 70px !important;
-        margin-right: -15px !important;
+       
         margin-top: 20px;
     }
     .icon {
         margin-left: -90px;
     }
     .card-titles {
-        margin: 10px 100px 0px 0px !important;
+        margin: 0px 65px 0px 0px !important;
+
         
     }
     #chart-calories, #chart-protein, #chart-fats, #chart-carbs, #chart-sugar, #chart-fiber {
@@ -1072,6 +1103,18 @@ footer {
     }
 }
 @media screen and (max-width:536px) {
+
+    .calories-icon {
+        top: 13px; 
+        left: calc(18px + 4.5vw);
+        width: 23px; 
+    }
+    .chart-icon {
+        top: 13px; 
+        left: calc(13px + 4.5vw);
+        width: 33px; 
+    }
+
     .brand-name h1 {
         font-size: 16px;
     }
