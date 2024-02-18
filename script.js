@@ -393,7 +393,7 @@ entryDiv.classList.add("entry");
 entryDiv.innerHTML = `
 <div class="entry1">
     <h3>${name} (${servingSize}g)&nbsp&nbsp</h3>
-    <p>Calories: <strong id="bold-entries">${calories}g</strong>&nbsp&nbsp</p>
+    <p>Calories: <strong id="bold-entries">${calories}</strong>&nbsp&nbsp</p>
     <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp&nbsp</p>
     <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp&nbsp</p>
     <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp&nbsp</p>
