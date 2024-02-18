@@ -223,12 +223,12 @@
                     <form action="#" method="post" onsubmit="handleSubmit(event)">
                         <div style="display: flex;">
                             <div class="form-group">
-                                <label for="name-input" class="required-label">Food Name:</label>
+                                <label for="name-input" class="required-label">Food Eaten:</label>
                                 <input type="text" id="name-input" name="name" placeholder="Enter name..." maxlength="20" required>
                             </div>
                     
                             <div class="form-group">
-                                <label for="serving-size-input">Serving Size:</label>
+                                <label for="serving-size-input">Serving Size (g):</label>
                                 <input type="number" id="serving-size-input" name="serving-size" placeholder="Enter serving size (g)..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
                             </div>
                         </div>
