@@ -386,7 +386,6 @@ td {
 .chart-icon, .calories-icon {
     position: absolute;
     height: auto;
-    z-index: 1;
 }
 .calories-icon {
     top: 28px; 
@@ -875,6 +874,9 @@ footer {
     
 }
 @media screen and (max-width: 1200px) {
+    .recent-entries {
+        margin-top: 50px !important;
+    }
     .chart-container {
         width: calc(60px + 3.5vw);
         height: calc(60px + 3.5vw);
@@ -925,7 +927,9 @@ footer {
     .container {
         flex-direction: row;
     }
-    .search-food,
+    .search-food {
+        margin-top: 25px;
+    }
     .add-new {
         margin-top: 25px;
         width: 50%;
@@ -1102,8 +1106,12 @@ footer {
         border: 2px solid white;
     }
 }
+@media screen and (max-width:500px) {
+    .search-food {
+        margin-top: 0px;
+    }
+}
 @media screen and (max-width:536px) {
-
     .calories-icon {
         top: 13px; 
         left: calc(18px + 4.5vw);
