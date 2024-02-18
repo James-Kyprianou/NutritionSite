@@ -1,8 +1,3 @@
-// cnat add food until a goal is set
-
-
-
-
 function openInfoPopup() {
     var popup = document.getElementById("info-popup");
     if (popup) {
@@ -487,13 +482,6 @@ let fatsMaxInput = parseInt(document.getElementById("fats-max-input").value) || 
 let carbsMaxInput = parseInt(document.getElementById("carbs-max-input").value) || 0;
 let sugarMaxInput = parseInt(document.getElementById("sugar-max-input").value) || 0;
 let fiberMaxInput = parseInt(document.getElementById("fiber-max-input").value) || 0;
-
-console.log("Calories Max:", caloriesMaxInput);
-console.log("Protein Max:", proteinMaxInput);
-console.log("Fats Max:", fatsMaxInput);
-console.log("Carbs Max:", carbsMaxInput);
-console.log("Sugar Max:", sugarMaxInput);
-console.log("Fiber Max:", fiberMaxInput);
 
 function handleSubmit(event) {
     event.preventDefault(); // Prevent form submission
