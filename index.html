@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Nutrition Dashbaord</title>
-    <script src="chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -29,6 +29,72 @@
                         the algorithm will automatically scale the nutrition data in the result accordingly."</p>
                     <button class="btn" id="close-button" onclick="closeInfoPopup()"><span>Close</span></button>
                     </div>
+                    <div id="popup" class="popup">
+                        <span class="close" onclick="closePopup()">&times;</span>
+                        <h2 class="goals-popup-title">Set Your Daily Macro Targets</h2><br>
+                        <p>If you prefer not to track something, set its value as 0.</p>
+                        <br>
+                        <form action="#" method="post" onsubmit="handleSubmit(event)">
+                            <div style="display: flex;">
+                                <div class="form-group">
+                                    <label for="calories-max-input">Calories:</label>
+                                    <input type="number" id="calories-max-input" name="calories-max" placeholder="Enter calories..." required>
+                                </div>
+                        
+                                <div class="form-group">
+                                    <label for="protein-max-input">Protein:</label>
+                                    <input type="number" id="protein-max-input" name="protein-max" placeholder="Enter protein..." required>
+                                </div>
+                            </div>
+                        
+                            <div style="display: flex;">
+                                <div class="form-group">
+                                    <label for="fats-max-input">Fats:</label>
+                                    <input type="number" id="fats-max-input" name="fats-max" placeholder="Enter fats..." required>
+                                </div>
+                        
+                                <div class="form-group">
+                                    <label for="carbs-max-input">Carbs:</label>
+                                    <input type="number" id="carbs-max-input" name="carbs-max" placeholder="Enter carbs..." required>
+                                </div>
+                            </div>
+                        
+                            <div style="display: flex;">
+                                <div class="form-group">
+                                    <label for="sugar-max-input">Sugar:</label>
+                                    <input type="number" id="sugar-max-input" name="sugar-max" placeholder="Enter sugar..." required>
+                                </div>
+                        
+                                <div class="form-group">
+                                    <label for="fiber-max-input">Fiber:</label>
+                                    <input type="number" id="fiber-max-input" name="fiber-max" placeholder="Enter fiber..." required>
+                                </div>
+                            </div>
+                        
+                            <button class="btn" id="apply-button" type="submit" ><span>Apply</span></button>
+                        </form>
+                    </div>
+                    <div id="confirmationBox" class="confirmation-box">
+                        <div class="confirmation-content">
+                            <h2 id="confirmationTitle"></h2>
+                            <br>
+                            <p>Are you sure you want to delete this entry?</p>
+                            <div class="confirmation-buttons">
+                                <button class="btn" id="reset-button3" onclick="confirmDeleteEntry()"><span>Yes</span></button>
+                                <button class="btn" id="reset-button4" onclick="closeConfirmationBox()"><span>No</span></button>
+                            </div>
+                        </div>
+                    </div>
+                            <div id="resetConfirmation" class="popup">
+                                <span class="close" onclick="closeResetConfirmation()">&times;</span>
+                                <h2 class="new-day-popup-title">New Day Confirmation</h2>
+                                <br>
+                                <div class="new-day-popup-text">Are you sure you want to start a new day? </div>
+                                <p class="new-day-popup-space"> This will reset the data from your previous day. 
+                                </p>
+                                <br>
+                                <button class="btn" id="reset-button2" onclick="resetValues()"><span>Reset</span></button>
+                            </div>
                 </div>
                 <div class="user">
                     <a href="#" class="btn" id="goals-button" onclick="openPopup()"><span>Set Goals</span></a>
