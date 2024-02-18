@@ -1,3 +1,4 @@
+<!--BlackBG And Disable Clicking When Popup-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +21,17 @@
                     <h2 class="main-title">Dashbaord</h2>
                     <img src="images/info-icon.png" class="info-icon" alt="Info Icon" onclick="openInfoPopup()">
                 <div id="info-popup" class="info-popup">
-                    <p>The Nutrition API</p>
-                    <p>API Ninjas</p>
-                    <p>"The Nutrition API extracts nutrition information from text using natural language processing.
-                        From food blogs to menus to recipes, it can read any text and calculate the corresponding nutrition data.
-                        <br>An intelligent feature of this API is custom portioning:
-                        if your text specifies quantities of individual food items or ingredients,
-                        the algorithm will automatically scale the nutrition data in the result accordingly."</p>
+                    <p class="info-title">How To Use</p>
+                    <p class="info-subtitle">Setting Goals:</p><br>
+                    <p class="info-paragraph">First you need to set your goals. If you don't, defualt values will be set. The goals you set will become the total amount of each macro you can consume each day (change your goals any time).</p><br>
+                    <p class="info-subtitle">Adding food & reset the day:</p><br>
+                    <p class="info-paragraph">Once your goal is set up, simply add new foods to track. The only required input is the food name; entering individual macros and serving size are optional. At the start of your new day, press the reset button to clear all values (this doesn't reset your goals for each day).</p><br>
+                    <p class="info-subtitle">Track your progress:</p><br>
+                    <p class="info-paragraph">As you start entering foods, you'll see that the cards for each macro and the food entries will populate with your data. If you make a mistake entering macros for a food, simply delete the entry and re-enter the correct information.</p><br>
+                    <p class="info-title">The Nutrition API</p>
+                    <a href="https://api-ninjas.com/api/nutrition" class="info-subtitle underline-text1" target="_blank">API Ninjas</a>
+                    <p class="info-paragraph"><br>The "Search For Food" feature uses the <a href="https://api-ninjas.com/api/nutrition" class="underline-text1" target="_blank">API Ninjas Nutrition API</a> which allows you to search for any food. You can search for food in specifies quantities or in grams.  
+                    <p class="info-sub-paragraph">For example: "2 Egss" or "120g Chicken Breast". If you don't add quantities, a defualt serving size will be used.</p><br>
                     <button class="btn" id="close-button" onclick="closeInfoPopup()"><span>Close</span></button>
                     </div>
                     <div id="popup" class="popup">
