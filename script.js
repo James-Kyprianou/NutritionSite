@@ -188,11 +188,16 @@ macros.forEach((macroName, index) => {
     const grayColor = '#3E5488'; // Define the color for the gray ring 3B4A72
 
     // Doughnut chart configuration
+    let backgroundColor = [chartColors[index], grayColor];
+    if (maxValue === 0) {
+        backgroundColor = [chartColors[index], 'transparent'];
+    }
+    
     const data = {
         labels: [macroName, 'Remaining'],
         datasets: [{
             data: [value, Math.max(0, maxValue - value)],
-            backgroundColor: [chartColors[index], grayColor],
+            backgroundColor: backgroundColor,
             borderWidth: 0
         }]
     };
@@ -238,8 +243,22 @@ function updateCharts() {
 
 
 
+// Function to check if the popup has been displayed before
+function checkPopupDisplayed() {
+    // Check if the flag for popup displayed exists in localStorage
+    const popupDisplayed = localStorage.getItem('popupDisplayed');
 
+    if (!popupDisplayed) {
+        // If the flag doesn't exist, show the popup
+        openPopup();
 
+        // Set the flag in localStorage to indicate that the popup has been displayed
+        localStorage.setItem('popupDisplayed', 'true');
+    }
+}
+
+// Call the function to check if the popup has been displayed when the page loads
+window.addEventListener('load', checkPopupDisplayed);
 
 
 
