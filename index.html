@@ -32,42 +32,43 @@
                     <div id="popup" class="popup">
                         <span class="close" onclick="closePopup()">&times;</span>
                         <h2 class="goals-popup-title">Set Your Daily Macro Targets</h2><br>
-                        <p>If you prefer not to track something, set its value as 0.</p>
+                        <p class="goals-paragraph">If not tracking something, leave input blank or enter 0 and default values will be provided.</p>
+                        <p class="goals-sub-paragraph">Defualt values may not meet your required macros.</p>
                         <br>
                         <form action="#" method="post" onsubmit="handleSubmit(event)">
                             <div style="display: flex;">
                                 <div class="form-group">
                                     <label for="calories-max-input">Calories:</label>
-                                    <input type="number" id="calories-max-input" name="calories-max" placeholder="Enter calories..." required>
+                                    <input type="number" id="calories-max-input" name="calories-max" placeholder="Enter calories...">
                                 </div>
                         
                                 <div class="form-group">
                                     <label for="protein-max-input">Protein:</label>
-                                    <input type="number" id="protein-max-input" name="protein-max" placeholder="Enter protein..." required>
+                                    <input type="number" id="protein-max-input" name="protein-max" placeholder="Enter protein...">
                                 </div>
                             </div>
                         
                             <div style="display: flex;">
                                 <div class="form-group">
                                     <label for="fats-max-input">Fats:</label>
-                                    <input type="number" id="fats-max-input" name="fats-max" placeholder="Enter fats..." required>
+                                    <input type="number" id="fats-max-input" name="fats-max" placeholder="Enter fats...">
                                 </div>
                         
                                 <div class="form-group">
                                     <label for="carbs-max-input">Carbs:</label>
-                                    <input type="number" id="carbs-max-input" name="carbs-max" placeholder="Enter carbs..." required>
+                                    <input type="number" id="carbs-max-input" name="carbs-max" placeholder="Enter carbs...">
                                 </div>
                             </div>
                         
                             <div style="display: flex;">
                                 <div class="form-group">
                                     <label for="sugar-max-input">Sugar:</label>
-                                    <input type="number" id="sugar-max-input" name="sugar-max" placeholder="Enter sugar..." required>
+                                    <input type="number" id="sugar-max-input" name="sugar-max" placeholder="Enter sugar...">
                                 </div>
                         
                                 <div class="form-group">
                                     <label for="fiber-max-input">Fiber:</label>
-                                    <input type="number" id="fiber-max-input" name="fiber-max" placeholder="Enter fiber..." required>
+                                    <input type="number" id="fiber-max-input" name="fiber-max" placeholder="Enter fiber...">
                                 </div>
                             </div>
                         
@@ -265,34 +266,35 @@
                         <button class="btn" id="submit-button" type="submit"><span>Add Food</span></button>
                     </form>
                 </div>     
-                
+                    <!--
 <div id="popup" class="popup">
     <span class="close" onclick="closePopup()">&times;</span>
     <h2 class="goals-popup-title">Set Your Daily Macro Targets</h2><br>
     <p>If you prefer not to track something, set its value as 0.</p>
     <br>
+
     <form action="#" method="post" onsubmit="handleSubmit(event)">
         <div style="display: flex;">
             <div class="form-group">
                 <label for="calories-max-input">Calories:</label>
-                <input type="number" id="calories-max-input" name="calories-max" placeholder="Enter calories..." required>
+                <input type="number" id="calories-max-input" name="calories-max" placeholder="Enter calories...">
             </div>
     
             <div class="form-group">
                 <label for="protein-max-input">Protein:</label>
-                <input type="number" id="protein-max-input" name="protein-max" placeholder="Enter protein..." required>
+                <input type="number" id="protein-max-input" name="protein-max" placeholder="Enter protein...">
             </div>
         </div>
     
         <div style="display: flex;">
             <div class="form-group">
                 <label for="fats-max-input">Fats:</label>
-                <input type="number" id="fats-max-input" name="fats-max" placeholder="Enter fats..." required>
+                <input type="number" id="fats-max-input" name="fats-max" placeholder="Enter fats...">
             </div>
     
             <div class="form-group">
                 <label for="carbs-max-input">Carbs:</label>
-                <input type="number" id="carbs-max-input" name="carbs-max" placeholder="Enter carbs..." required>
+                <input type="number" id="carbs-max-input" name="carbs-max" placeholder="Enter carbs...">
             </div>
         </div>
     
@@ -307,10 +309,11 @@
                 <input type="number" id="fiber-max-input" name="fiber-max" placeholder="Enter fiber..." required>
             </div>
         </div>
+
     
         <button class="btn" id="apply-button" type="submit" ><span>Apply</span></button>
     </form>
-</div>
+</div>    -->
 <div id="confirmationBox" class="confirmation-box">
     <div class="confirmation-content">
         <h2 id="confirmationTitle"></h2>
