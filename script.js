@@ -188,16 +188,11 @@ macros.forEach((macroName, index) => {
     const grayColor = '#3E5488'; // Define the color for the gray ring 3B4A72
 
     // Doughnut chart configuration
-    let backgroundColor = [chartColors[index], grayColor];
-    if (maxValue === 0) {
-        backgroundColor = [chartColors[index], 'transparent'];
-    }
-    
     const data = {
         labels: [macroName, 'Remaining'],
         datasets: [{
             data: [value, Math.max(0, maxValue - value)],
-            backgroundColor: backgroundColor,
+            backgroundColor: [chartColors[index], grayColor],
             borderWidth: 0
         }]
     };
@@ -536,6 +531,27 @@ function handleSubmit(event) {
         let carbsMaxInput = parseInt(document.getElementById("carbs-max-input").value) || 0;
         let sugarMaxInput = parseInt(document.getElementById("sugar-max-input").value) || 0;
         let fiberMaxInput = parseInt(document.getElementById("fiber-max-input").value) || 0;
+
+        // Check if any input value is 0 or empty, set default max value to 100
+    if (caloriesMaxInput === 0 || isNaN(caloriesMaxInput)) {
+        caloriesMaxInput = 2000;
+    }
+    if (proteinMaxInput === 0 || isNaN(proteinMaxInput)) {
+        proteinMaxInput = 60;
+    }
+    if (fatsMaxInput === 0 || isNaN(fatsMaxInput)) {
+        fatsMaxInput = 65;
+    }
+    if (carbsMaxInput === 0 || isNaN(carbsMaxInput)) {
+        carbsMaxInput = 300;
+    }
+    if (sugarMaxInput === 0 || isNaN(sugarMaxInput)) {
+        sugarMaxInput = 35;
+    }
+    if (fiberMaxInput === 0 || isNaN(fiberMaxInput)) {
+        fiberMaxInput = 25;
+    }
+
  
         // Update max value elements
         document.getElementById("calories-max").textContent = "/" + caloriesMaxInput;
