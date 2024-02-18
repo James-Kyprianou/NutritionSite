@@ -103,12 +103,11 @@ h3 {
     cursor: pointer;
     transition: all .3s;
 }
-.btn:active,
-.btn:hover {
+.btn:active, .btn2:active,
+.btn:hover, .btn2:hover {
  outline: 0;
  transform: scale(1.05);
 }
-
 .btn span, .btn2  span {
  background-color: rgb(5, 6, 45);
  padding: 16px 24px;
@@ -118,26 +117,12 @@ h3 {
  transition: 300ms;
 }
 .btn2 span {
-    padding: 16px 5.5px;
-}
-   
-
-
-
-
-
-
-
-
-
-
-
-
-.btn:hover span {
+    padding: 16px 18.5px;
+}  
+.btn:hover span, .btn2:hover span {
  background: none;
 }
-
-.btn:active {
+.btn:active,.btn2:active {
  transform: scale(0.9);
 }
 #submit-button {
@@ -725,6 +710,15 @@ input[type="submit"] {
 .new-day-popup-text {
     font-size: 19px;
 }
+.goals-paragraph {
+    font-size: 17.3px;
+}
+
+.goals-sub-paragraph {
+    margin-top: 10px;
+    color: #bac5df;
+    font-size: 15.3px;
+}
 
 
 /* Footer */
@@ -863,23 +857,23 @@ footer {
 
 
 @media screen and (max-width: 1900px) { 
-       #goals-button {
-        background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-        line-height: calc(11px + 0.4vw);
-        max-width: calc(12px + 15vw);
-      
-        margin-right: 15px;
-        font-weight: bold;
-        margin: 7.5px 12px;
-    }
-    #reset-button {
-        background-image: linear-gradient(144deg,#ffa640, #d37159 50%,rgb(235, 47, 0));
-        line-height: calc(11px + 0.4vw);
-        max-width: calc(12px + 15vw);
-      
-        font-weight: bold;
-        margin: 7.5px 12px;
-    }
+    #goals-button {
+     background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+     line-height: calc(11px + 0.4vw);
+     max-width: calc(12px + 15vw);
+     min-width: calc(12px + 15vw);
+     margin-right: 15px;
+     font-weight: bold;
+     margin: 7.5px 12px;
+ }
+ #reset-button {
+     background-image: linear-gradient(144deg,#ffa640, #d37159 50%,rgb(235, 47, 0));
+     line-height: calc(11px + 0.4vw);
+     max-width: calc(12px + 15vw);
+     min-width: calc(12px + 15vw);
+     font-weight: bold;
+     margin: 7.5px 12px;
+ }
 }
 @media screen and (max-width: 1200px) {
     .recent-entries {
@@ -1057,12 +1051,18 @@ footer {
         width: calc(100px + 15.5vw) !important;
         height: calc(50px + 15.5vw) !important;
     }
+    .btn2 span {
+        padding: 16px 7px !important;
+    }
 }
 
 @media screen and (max-width: 392px) { 
     .container .content .cards .card {
         width: calc(100px + 13.6vw) !important;
         height: calc(50px + 13.6vw) !important;
+    }
+    .btn2 span {
+        padding: 16px 4px !important;
     }
 }
 
@@ -1134,7 +1134,9 @@ footer {
         font-size: 12px;
         margin: 7.5px 0px;
     }
-
+    .btn2 span {
+        padding: 16px 12px;
+    }
     .calories-icon {
         top: 13px; 
         left: calc(18px + 4.5vw);
