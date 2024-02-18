@@ -78,6 +78,7 @@ h3 {
     border-radius: 15px;
     z-index: 9999;
     color: var(--main-text);
+    width: calc(200px + 30vw) !important;
 }
 .btn, .btn2 {
     align-items: center;
@@ -163,8 +164,7 @@ h3 {
     margin: 0 0 15px 15px;
 }
 #close-button {
-    margin: 15px 0 0 0;
-    line-height: 0.4em;
+    line-height: 0.2em;
 }
 #search-btn {
     background-image: linear-gradient(144deg,#ffffff, rgb(243, 66, 205) 100%,#00DDEB);
@@ -710,6 +710,7 @@ input[type="submit"] {
 .new-day-popup-text {
     font-size: 19px;
 }
+
 .goals-paragraph {
     font-size: 17.3px;
 }
@@ -720,10 +721,63 @@ input[type="submit"] {
     font-size: 15.3px;
 }
 
+.info-title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.info-subtitle {
+    font-size: 23px;
+    color: #bac5df !important;
+}
+
+.info-paragraph {
+    font-size: 16px;
+}
+
+.info-sub-paragraph {
+    color: #bac5df;
+    font-size: 14px !important;
+}
+
+
+@media screen and (max-width: 700px) {
+    .goals-paragraph {
+        font-size: 13px;
+    }
+    
+    .goals-sub-paragraph {
+        margin-top: 10px;
+        color: #bac5df;
+        font-size: 11px;
+    }
+    
+    .info-title {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .info-subtitle {
+        font-size: 19px;
+        color: #bac5df !important;
+    }
+    
+    .info-paragraph {
+        font-size: 12px;
+    }
+    
+    .info-sub-paragraph {
+        color: #bac5df;
+        font-size: 10px !important;
+    }
+}
+
+
 
 /* Footer */
 
 footer {
+    margin-top: 50px;
     background-color: var(--background-colour);
     color: #fff;
     padding: 20px;
