@@ -392,17 +392,6 @@ function loadRecentEntries() {
 
 //Function to create and append a recent entry
 function createRecentEntry(name, servingSize, calories, protein, fats, carbs, sugar, fiber) {
-    // Check if the entry already exists
-    const existingEntry = Array.from(document.querySelectorAll('.entry')).find(entry => {
-        const entryName = entry.querySelector('h3').textContent.split(' ')[0];
-        const entryServingSize = parseInt(entry.querySelector('h3').textContent.split('(')[1].split('g')[0]);
-        return entryName === name && entryServingSize === servingSize;
-    });
-
-    if (existingEntry) {
-        return; // If entry already exists, do nothing
-    }
-
     // Save the entry to localStorage
     const entry = {
         name: name,
