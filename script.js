@@ -336,9 +336,6 @@ function loadValuesFromStorage() {
     document.getElementById("sugar-max").textContent = "/" + (parseInt(localStorage.getItem("sugarMax")) || defaultMaxValues.sugar);
     document.getElementById("fiber-max").textContent = "/" + (parseInt(localStorage.getItem("fiberMax")) || defaultMaxValues.fiber);
 
-    const recentEntriesList = document.getElementById("recentEntriesList");
-    recentEntriesList.innerHTML = '';
-
     // Load entries from localStorage
     let entries = JSON.parse(localStorage.getItem('entries')) || [];
     entries.reverse(); // Reverse the order of entries (newest first)
@@ -353,6 +350,16 @@ function loadValuesFromStorage() {
     document.getElementById("carbs-max-input").value = localStorage.getItem("carbsMax") || "";
     document.getElementById("sugar-max-input").value = localStorage.getItem("sugarMax") || "";
     document.getElementById("fiber-max-input").value = localStorage.getItem("fiberMax") || "";
+
+    const recentEntriesList = document.getElementById("recentEntriesList");
+    if (recentEntriesList.innerHTML === '') {
+        let entries = JSON.parse(localStorage.getItem('entries')) || [];
+        entries.reverse(); // Reverse the order of entries (newest first)
+        entries.forEach(entry => {
+            createRecentEntry(entry.name, entry.servingSize, entry.calories, entry.protein, entry.fats, entry.carbs, entry.sugar, entry.fiber);
+        });
+    }
+
 }
 
 
@@ -360,32 +367,19 @@ function loadValuesFromStorage() {
 // Call loadValuesFromStorage when the page loads
 window.addEventListener("load", loadValuesFromStorage);
 
+// Function to create and append a recent entry
 function createRecentEntry(name, servingSize, calories, protein, fats, carbs, sugar, fiber) {
-    // Construct the entry content
-    const newEntryContent = `${name}-${servingSize}-${calories}-${protein}-${fats}-${carbs}-${sugar}-${fiber}`;
-
-    // Retrieve existing entries from localStorage
-    let entries = JSON.parse(localStorage.getItem('entries')) || [];
-
-    // Check if the new entry already exists
-    const isDuplicate = entries.some(entry => {
-        const existingEntryContent = `${entry.name}-${entry.servingSize}-${entry.calories}-${entry.protein}-${entry.fats}-${entry.carbs}-${entry.sugar}-${entry.fiber}`;
-        return existingEntryContent === newEntryContent;
+    // Check if the entry already exists
+    const existingEntry = Array.from(document.querySelectorAll('.entry')).find(entry => {
+        const entryName = entry.querySelector('h3').textContent.split(' ')[0];
+        const entryServingSize = parseInt(entry.querySelector('h3').textContent.split('(')[1].split('g')[0]);
+        return entryName === name && entryServingSize === servingSize;
     });
 
-    // If it's a duplicate, return without adding the entry
-    if (isDuplicate) {
-        return;
+    if (existingEntry) {
+        return; // If entry already exists, do nothing
     }
-
-    // Update card values and store them in localStorage
-    updateCardAndStorage("calories", calories);
-    updateCardAndStorage("protein", protein);
-    updateCardAndStorage("fats", fats);
-    updateCardAndStorage("carbs", carbs);
-    updateCardAndStorage("sugar", sugar);
-    updateCardAndStorage("fiber", fiber);
-
+    updateCharts()
     // Save the entry to localStorage
     const entry = {
         name: name,
@@ -397,37 +391,40 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
         sugar: sugar,
         fiber: fiber
     };
+
+    let entries = JSON.parse(localStorage.getItem('entries')) || [];
     entries.unshift(entry); // Add entry to the beginning of the array
     localStorage.setItem('entries', JSON.stringify(entries));
 
-    // Append the entry to the recent entries list
-    const recentEntriesList = document.getElementById("recentEntriesList");
-    const entryDiv = document.createElement("div");
-    entryDiv.classList.add("entry");
-    entryDiv.innerHTML = `
-        <div class="entry1">
-            <h3>${name} (${servingSize}g)&nbsp&nbsp</h3>
-            <p>Calories: <strong id="bold-entries">${calories}</strong>&nbsp&nbsp</p>
-            <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp&nbsp</p>
-            <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp&nbsp</p>
-            <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp&nbsp</p>
-            <p>Sugar: <strong id="bold-entries">${sugar}g</strong>&nbsp&nbsp</p>
-            <p>Fiber: <strong id="bold-entries">${fiber}g</strong>&nbsp&nbsp</p>
-            <button class="btn entry-delete-button" onclick="deleteEntry(this)"><span>Delete Entry</span></button>
-        </div>
-        <hr class="entries-line">
-    `;
-    recentEntriesList.prepend(entryDiv); // Add entry to the beginning of the list
+// Append the entry to the recent entries list
+const recentEntriesList = document.getElementById("recentEntriesList");
+const entryDiv = document.createElement("div");
+entryDiv.classList.add("entry");
+entryDiv.innerHTML = `
+<div class="entry1">
+    <h3>${name} (${servingSize}g)&nbsp&nbsp</h3>
+    <p>Calories: <strong id="bold-entries">${calories}</strong>&nbsp&nbsp</p>
+    <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp&nbsp</p>
+    <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp&nbsp</p>
+    <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp&nbsp</p>
+    <p>Sugar: <strong id="bold-entries">${sugar}g</strong>&nbsp&nbsp</p>
+    <p>Fiber: <strong id="bold-entries">${fiber}g</strong>&nbsp&nbsp</p>
+    <button class="btn entry-delete-button" onclick="deleteEntry(this)"><span>Delete Entry</span></button>
+</div>
+<hr class="entries-line">
+`;
+recentEntriesList.prepend(entryDiv); // Add entry to the beginning of the list
 
-    // Add event listener to the dynamically generated delete button
-    const deleteButtons = document.querySelectorAll('.entry-delete-button');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Scroll to the bottom of the page
-            window.scrollTo(0, document.body.scrollHeight);
-        });
+// Add event listener to the dynamically generated delete button
+const deleteButtons = document.querySelectorAll('.entry-delete-button');
+deleteButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        // Scroll to the bottom of the page
+        window.scrollTo(0, document.body.scrollHeight);
     });
+});
 }
+
 // Function to delete an entry
 function deleteEntry(button) {
     // Store the entry div
