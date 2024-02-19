@@ -358,22 +358,24 @@ function loadValuesFromStorage() {
     const recentEntriesLoaded = localStorage.getItem('recentEntriesLoaded');
 
     if (!recentEntriesLoaded) {
-        // Load entries from localStorage
-        let entries = JSON.parse(localStorage.getItem('entries')) || [];
-        entries.reverse(); // Reverse the order of entries (newest first)
-        entries.forEach(entry => {
-            createRecentEntry(entry.name, entry.servingSize, entry.calories, entry.protein, entry.fats, entry.carbs, entry.sugar, entry.fiber);
-        });
-
+        loadRecentEntries();
         // Set the flag to indicate that recent entries have been loaded
         localStorage.setItem('recentEntriesLoaded', 'true');
     }
 }
 
-
-
 // Call loadValuesFromStorage when the page loads
 window.addEventListener("load", loadValuesFromStorage);
+
+// Function to load recent entries from localStorage and populate the recent entries list
+function loadRecentEntries() {
+    // Load entries from localStorage
+    let entries = JSON.parse(localStorage.getItem('entries')) || [];
+    entries.reverse(); // Reverse the order of entries (newest first)
+    entries.forEach(entry => {
+        createRecentEntry(entry.name, entry.servingSize, entry.calories, entry.protein, entry.fats, entry.carbs, entry.sugar, entry.fiber);
+    });
+}
 
 //Function to create and append a recent entry
 function createRecentEntry(name, servingSize, calories, protein, fats, carbs, sugar, fiber) {
