@@ -336,6 +336,9 @@ function loadValuesFromStorage() {
     document.getElementById("sugar-max").textContent = "/" + (parseInt(localStorage.getItem("sugarMax")) || defaultMaxValues.sugar);
     document.getElementById("fiber-max").textContent = "/" + (parseInt(localStorage.getItem("fiberMax")) || defaultMaxValues.fiber);
 
+    const recentEntriesList = document.getElementById("recentEntriesList");
+    recentEntriesList.innerHTML = '';
+
     // Load entries from localStorage
     let entries = JSON.parse(localStorage.getItem('entries')) || [];
     entries.reverse(); // Reverse the order of entries (newest first)
