@@ -354,6 +354,20 @@ function loadValuesFromStorage() {
     document.getElementById("carbs-max-input").value = localStorage.getItem("carbsMax") || "";
     document.getElementById("sugar-max-input").value = localStorage.getItem("sugarMax") || "";
     document.getElementById("fiber-max-input").value = localStorage.getItem("fiberMax") || "";
+
+    const recentEntriesLoaded = localStorage.getItem('recentEntriesLoaded');
+
+    if (!recentEntriesLoaded) {
+        // Load entries from localStorage
+        let entries = JSON.parse(localStorage.getItem('entries')) || [];
+        entries.reverse(); // Reverse the order of entries (newest first)
+        entries.forEach(entry => {
+            createRecentEntry(entry.name, entry.servingSize, entry.calories, entry.protein, entry.fats, entry.carbs, entry.sugar, entry.fiber);
+        });
+
+        // Set the flag to indicate that recent entries have been loaded
+        localStorage.setItem('recentEntriesLoaded', 'true');
+    }
 }
 
 
