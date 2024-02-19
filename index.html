@@ -27,7 +27,7 @@
                     <p class="info-subtitle">Adding food & reset the day:</p><br>
                     <p class="info-paragraph">Once your goal is set up, simply add new foods to track. The only required input is the food name; entering individual macros and serving size are optional. At the start of your new day, press the reset button to clear all values (this doesn't reset your goals for each day).</p><br>
                     <p class="info-subtitle">Track your progress:</p><br>
-                    <p class="info-paragraph">As you start entering foods, you'll see that the cards for each macro and the food entries will populate with your data. If you make a mistake entering macros for a food, simply delete the entry and re-enter the correct information.</p><br>
+                    <p class="info-paragraph">As you add foods, the charts & values in each card for macros and the food entries will populate with your data. If you make a mistake entering macros for a food, simply delete the entry and re-enter the correct information.</p><br>
                     <p class="info-title">The Nutrition API</p>
                     <a href="https://api-ninjas.com/api/nutrition" class="info-subtitle underline-text1" target="_blank">API Ninjas</a>
                     <p class="info-paragraph"><br>The "Search For Food" feature uses the <a href="https://api-ninjas.com/api/nutrition" class="underline-text1" target="_blank">API Ninjas Nutrition API</a> which allows you to search for any food. You can search for food in specifies quantities or in grams.  
@@ -202,11 +202,14 @@
                     <div class="title">
                         <h2>Today's Entries</h2>
                     </div>
+                    <div class="entry1" id="no-entries-placeholder">
+                        <p>No entries</p><button class="btn entry-delete-button" id="btn-placeholder-colour" onclick="deleteEntry(this)"><span></span></button>
+                    </div>
                     <div id="recentEntriesList"></div>
                 </div>
                 <div class="search-food">
                     <div class="title">
-                        <h2>Search For Food</h2>
+                        <h2 class="search-food-title">Search Food</h2>
                     </div> 
                     <p class="search-food-text">Searches food from a <a href="https://api-ninjas.com/api/nutrition" class="underline-text1" target="_blank">nutrition database</a>.</p> 
                     <br>
@@ -223,13 +226,13 @@
                     <form action="#" method="post" onsubmit="handleSubmit(event)">
                         <div style="display: flex;">
                             <div class="form-group">
-                                <label for="name-input" class="required-label">Food Eaten:</label>
-                                <input type="text" id="name-input" name="name" placeholder="Enter name..." maxlength="20" required>
+                                <label for="name-input" class="required-label">Name & Quantity:</label>
+                                <input type="text" id="name-input" name="name" placeholder="Quantity is optional..." maxlength="20" required>
                             </div>
                     
                             <div class="form-group">
-                                <label for="serving-size-input">Serving Size (g):</label>
-                                <input type="number" id="serving-size-input" name="serving-size" placeholder="Enter serving size (g)..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
+                                <label for="serving-size-input">Grams/Serving:</label>
+                                <input type="number" id="serving-size-input" name="serving-size" placeholder="Serving size (g)..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
                             </div>
                         </div>
 
