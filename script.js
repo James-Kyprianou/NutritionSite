@@ -360,18 +360,23 @@ function loadValuesFromStorage() {
 // Call loadValuesFromStorage when the page loads
 window.addEventListener("load", loadValuesFromStorage);
 
-// Function to create and append a recent entry
 function createRecentEntry(name, servingSize, calories, protein, fats, carbs, sugar, fiber) {
-    // Check if the entry already exists
-    const existingEntry = Array.from(document.querySelectorAll('.entry')).find(entry => {
-        const entryName = entry.querySelector('h3').textContent.split(' ')[0];
-        const entryServingSize = parseInt(entry.querySelector('h3').textContent.split('(')[1].split('g')[0]);
-        return entryName === name && entryServingSize === servingSize;
-    });
+    // Construct a unique identifier for the entry
+    const entryId = name + '-' + servingSize;
 
+    // Check if an entry with the same identifier already exists
+    const existingEntry = document.getElementById(entryId);
     if (existingEntry) {
         return; // If entry already exists, do nothing
     }
+
+    // Update card values and store them in localStorage
+    updateCardAndStorage("calories", calories);
+    updateCardAndStorage("protein", protein);
+    updateCardAndStorage("fats", fats);
+    updateCardAndStorage("carbs", carbs);
+    updateCardAndStorage("sugar", sugar);
+    updateCardAndStorage("fiber", fiber);
 
     // Save the entry to localStorage
     const entry = {
@@ -384,7 +389,6 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
         sugar: sugar,
         fiber: fiber
     };
-
     let entries = JSON.parse(localStorage.getItem('entries')) || [];
     entries.unshift(entry); // Add entry to the beginning of the array
     localStorage.setItem('entries', JSON.stringify(entries));
@@ -393,6 +397,7 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
     const recentEntriesList = document.getElementById("recentEntriesList");
     const entryDiv = document.createElement("div");
     entryDiv.classList.add("entry");
+    entryDiv.id = entryId; // Set the ID to the unique identifier
     entryDiv.innerHTML = `
         <div class="entry1">
             <h3>${name} (${servingSize}g)&nbsp&nbsp</h3>
@@ -417,7 +422,6 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
         });
     });
 }
-
 // Function to delete an entry
 function deleteEntry(button) {
     // Store the entry div
