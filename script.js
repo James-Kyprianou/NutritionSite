@@ -361,13 +361,21 @@ function loadValuesFromStorage() {
 window.addEventListener("load", loadValuesFromStorage);
 
 function createRecentEntry(name, servingSize, calories, protein, fats, carbs, sugar, fiber) {
-    // Construct a unique identifier for the entry
-    const entryId = name + '-' + servingSize;
+    // Construct the entry content
+    const newEntryContent = `${name}-${servingSize}-${calories}-${protein}-${fats}-${carbs}-${sugar}-${fiber}`;
 
-    // Check if an entry with the same identifier already exists
-    const existingEntry = document.getElementById(entryId);
-    if (existingEntry) {
-        return; // If entry already exists, do nothing
+    // Retrieve existing entries from localStorage
+    let entries = JSON.parse(localStorage.getItem('entries')) || [];
+
+    // Check if the new entry already exists
+    const isDuplicate = entries.some(entry => {
+        const existingEntryContent = `${entry.name}-${entry.servingSize}-${entry.calories}-${entry.protein}-${entry.fats}-${entry.carbs}-${entry.sugar}-${entry.fiber}`;
+        return existingEntryContent === newEntryContent;
+    });
+
+    // If it's a duplicate, return without adding the entry
+    if (isDuplicate) {
+        return;
     }
 
     // Update card values and store them in localStorage
@@ -389,7 +397,6 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
         sugar: sugar,
         fiber: fiber
     };
-    let entries = JSON.parse(localStorage.getItem('entries')) || [];
     entries.unshift(entry); // Add entry to the beginning of the array
     localStorage.setItem('entries', JSON.stringify(entries));
 
@@ -397,7 +404,6 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
     const recentEntriesList = document.getElementById("recentEntriesList");
     const entryDiv = document.createElement("div");
     entryDiv.classList.add("entry");
-    entryDiv.id = entryId; // Set the ID to the unique identifier
     entryDiv.innerHTML = `
         <div class="entry1">
             <h3>${name} (${servingSize}g)&nbsp&nbsp</h3>
