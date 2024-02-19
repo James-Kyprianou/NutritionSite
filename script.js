@@ -364,6 +364,17 @@ function loadValuesFromStorage() {
         // Set the flag to indicate that recent entries have been loaded
         localStorage.setItem('recentEntriesLoaded', 'true');
     }
+
+    const noEntriesPlaceholder = document.getElementById('no-entries-placeholder');
+
+    if (entries.length === 0) {
+        // If there are no entries, display the placeholder
+        noEntriesPlaceholder.style.display = 'block';
+    } else {
+        // If there are entries, hide the placeholder
+        noEntriesPlaceholder.style.display = 'none';
+    }
+
 }
 
 // Call loadValuesFromStorage when the page loads
@@ -438,6 +449,29 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
 
     // Update the charts
     updateCharts();
+
+    updateNoEntriesPlaceholder();
+}
+
+// Function to update the visibility of the "No entries" placeholder and the entries line
+function updateNoEntriesPlaceholder() {
+    // Get the "No entries" placeholder element
+    const noEntriesPlaceholder = document.getElementById('no-entries-placeholder');
+    // Get the entries line element
+    const entriesLine = document.querySelector('.entries-line');
+
+    // Check if there are any entries present
+    const entries = JSON.parse(localStorage.getItem('entries')) || [];
+
+    if (entries.length === 0) {
+        // If there are no entries, display the placeholder and hide the entries line
+        noEntriesPlaceholder.style.display = 'block';
+        entriesLine.style.display = 'none';
+    } else {
+        // If there are entries, hide the placeholder and display the entries line
+        noEntriesPlaceholder.style.display = 'none';
+        entriesLine.style.display = 'block';
+    }
 }
 
 // Function to delete an entry
@@ -488,6 +522,8 @@ function deleteEntry(button) {
 
         // Update the charts
         updateCharts();
+
+        updateNoEntriesPlaceholder();
 
         // Close the confirmation box
         closeConfirmationBox();
