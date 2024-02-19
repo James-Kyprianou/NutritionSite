@@ -325,7 +325,9 @@ function loadValuesFromStorage() {
     const macros = ["calories", "protein", "fats", "carbs", "sugar", "fiber"];
     macros.forEach(macroName => {
         const value = parseInt(localStorage.getItem(macroName)) || 0;
-        document.getElementById(macroName + "-value").textContent = value + "g";
+        // Append "g" for all macros except "calories"
+        const displayValue = macroName === "calories" ? value : value + "g";
+        document.getElementById(macroName + "-value").textContent = displayValue;
     });
 
     // Load max values from localStorage, or set default values if not present
