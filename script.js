@@ -791,3 +791,18 @@ $(document).ready(function() {
         `;
         recentEntriesList.prepend(entryDiv);
     }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var buttons = document.querySelectorAll('.btn, .btn2');
+        
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                this.classList.add('clicked');
+                var btn = this;
+                setTimeout(function() {
+                    btn.classList.remove('clicked');
+                }, 250); // Hover effect lasts for 1 second (1000 milliseconds)
+            });
+        });
+    });
