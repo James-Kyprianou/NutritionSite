@@ -65,13 +65,23 @@ h3 {
     transform: scale(1.05);
     cursor: pointer;
 }
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 999;
+    display: none;
+}
 .info-popup {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #141b2d;
+    background-color: rgba(20,27,45, 0.95);
     box-shadow: #141b2d 0 15px 30px -5px;
     padding: 20px;
     border: 1px solid #4d5281;
@@ -569,31 +579,6 @@ a:visited {
     font-size: 21px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .confirmation-box {
     display: none;
     position: fixed;
@@ -708,6 +693,39 @@ input[type="submit"] {
 }
 
 /* Popups */
+#duplicateNameErrorTitle {
+    font-size: 35px;
+    color: rgb(230, 0, 0);
+}
+#duplicateNameErrorSubTitle {
+    margin-top: 5px;
+    font-size: 20px;
+}
+#duplicateName {
+    font-size: 18px;
+}
+
+#popupMessage {
+    font-size: 18px;
+}
+#duplicateNameSub {
+    font-size: 16px;
+    color: #bac5df;
+    margin: 5px 0 0 0;
+}
+.popup-content {
+    background-color: rgba(20,27,45, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+.popup-close {
+    position: absolute;
+    top: -6.5px;
+    right: 5px;
+    font-size: 40px;
+    cursor: pointer;
+}
 
 .popup {
     display: none;
@@ -715,7 +733,7 @@ input[type="submit"] {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #141b2d;
+    background-color: rgba(20,27,45, 0.95);
     box-shadow: #141b2d 0 15px 30px -5px;
     padding: 20px;
     border: 1px solid #4d5281;
@@ -1280,11 +1298,3 @@ footer {
         display: none;
     }
 }
-
-
-
-
-
-
-
-
