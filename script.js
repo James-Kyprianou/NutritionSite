@@ -1,3 +1,9 @@
+/*
+window.addEventListener('beforeunload', function() {
+    localStorage.clear();
+});
+*/
+
 function openInfoPopup() {
     var popup = document.getElementById("info-popup");
     if (popup) {
@@ -286,7 +292,8 @@ function resetValues() {
     const macros = ["calories", "protein", "fats", "carbs", "sugar", "fiber"];
     
     macros.forEach(macroName => {
-        document.getElementById(macroName + "-value").textContent = "0g";
+        const valueText = macroName === "calories" ? "0" : "0g";
+        document.getElementById(macroName + "-value").textContent = valueText;
         localStorage.setItem(macroName, "0");
     });
 
@@ -314,7 +321,7 @@ function updateCardAndStorage(macroName, value) {
     let newValue = currentValue + value;
 
     // Update the card text content with "g" appended
-    document.getElementById(macroName + "-value").textContent = newValue + "g";
+    document.getElementById(macroName + "-value").textContent = macroName === "calories" ? newValue : newValue + "g";
 
     // Store the new value in localStorage
     localStorage.setItem(macroName, newValue.toString());
@@ -421,6 +428,9 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
     entries.unshift(entry); // Add entry to the beginning of the array
     localStorage.setItem('entries', JSON.stringify(entries));
 
+    appendRecentEntryToDOM(name, servingSize, calories, protein, fats, carbs, sugar, fiber);
+
+/*
     // Append the entry to the recent entries list if it's not already present
     const recentEntriesList = document.getElementById("recentEntriesList");
     const existingEntry = Array.from(recentEntriesList.querySelectorAll('.entry')).find(entry => {
@@ -447,15 +457,8 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
         `;
         recentEntriesList.prepend(entryDiv); // Add entry to the beginning of the list
 
-        // Add event listener to the dynamically generated delete button
-        const deleteButtons = document.querySelectorAll('.entry-delete-button');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Scroll to the bottom of the page
-                window.scrollTo(0, document.body.scrollHeight);
-            });
-        });
-    }
+        */
+    
 
     // Update the charts
     updateCharts();
@@ -486,11 +489,11 @@ function updateNoEntriesPlaceholder() {
 
 // Function to delete an entry
 function deleteEntry(button) {
-    // Store the entry div
-    const entryDiv = button.parentElement;
+    const entryDiv = button.closest(".entry");
+    const entryName = entryDiv.querySelector("h3").textContent.split("(")[0].trim();
 
-    // Get the name of the entry being deleted
-    const entryName = entryDiv.querySelector("h3").textContent.split(' ')[0];
+    // Remove the entry name from the entryNames array
+    entryNames = entryNames.filter(name => name !== entryName);
 
     // Set the title of the confirmation box
     const confirmationTitle = document.getElementById('confirmationTitle');
@@ -499,6 +502,8 @@ function deleteEntry(button) {
     // Store the entry data
     const name = entryDiv.querySelector("h3").textContent.split(' ')[0]; // Get the name from the entry title
     const servingSize = parseInt(entryDiv.querySelector("h3").textContent.split('(')[1].split('g')[0]); // Get the serving size from the entry title
+
+    console.log("Entry name before deletion:", entryNames);
 
     // Show the confirmation box
     const confirmationBox = document.getElementById('confirmationBox');
@@ -524,22 +529,30 @@ function deleteEntry(button) {
         updateCardAndStorage("fiber", -fiber);
 
         // Remove the entry from the recent entries list
-        entryDiv.remove();
-
-        // Remove the entry from localStorage
+        
+        closeConfirmationBox();
+        
+       // Remove the entry from localStorage
         let entries = JSON.parse(localStorage.getItem('entries')) || [];
-        entries = entries.filter(entry => entry.name !== name || entry.servingSize !== servingSize);
+        entries = entries.filter(entry => entry.name !== entryName);
         localStorage.setItem('entries', JSON.stringify(entries));
 
+        // Remove the entry name from entryNames array in localStorage
+        let entryNames = JSON.parse(localStorage.getItem('entryNames')) || [];
+        entryNames = entryNames.filter(name => name !== entryName);
+        localStorage.setItem('entryNames', JSON.stringify(entryNames));
+
+        entryDiv.remove();
         // Update the charts
         updateCharts();
 
         updateNoEntriesPlaceholder();
 
         // Close the confirmation box
-        closeConfirmationBox();
+       
     };
 }
+
 
 // Function to close the confirmation box
 function closeConfirmationBox() {
@@ -737,5 +750,44 @@ $(document).ready(function() {
             $('#food-details').html(html);
         }
     });
-
-
+    /*
+    function appendRecentEntryToDOM(name, servingSize, calories, protein, fats, carbs, sugar, fiber) {
+        const recentEntriesList = document.getElementById("recentEntriesList");
+        const entryDiv = document.createElement("div");
+        entryDiv.classList.add("entry");
+        const servingText = servingSize ? `(${servingSize}g)&nbsp&nbsp` : "(N/A)&nbsp&nbsp";
+        entryDiv.innerHTML = `
+            <div class="entry1">
+                <h3>${name} ${servingText}</h3>
+                <p>Calories: <strong id="bold-entries">${calories}</strong>&nbsp&nbsp</p>
+                <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp&nbsp</p>
+                <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp&nbsp</p>
+                <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp&nbsp</p>
+                <p>Sugar: <strong id="bold-entries">${sugar}g</strong>&nbsp&nbsp</p>
+                <p>Fiber: <strong id="bold-entries">${fiber}g</strong>&nbsp&nbsp</p>
+                <button class="btn entry-delete-button" onclick="deleteEntry(this)"><span>Delete Entry</span></button>
+            </div>
+            <hr class="entries-line">
+        `;
+        recentEntriesList.prepend(entryDiv);
+    }*/
+    function appendRecentEntryToDOM(name, servingSize, calories, protein, fats, carbs, sugar, fiber) {
+        const recentEntriesList = document.getElementById("recentEntriesList");
+        const entryDiv = document.createElement("div");
+        entryDiv.classList.add("entry");
+        const servingText = servingSize ? `<span class='serving-text'>(${servingSize}g)</span>&nbsp;&nbsp;` : "<span class='serving-text'>(N/A)</span>&nbsp;&nbsp;"; // Apply class for styling
+        entryDiv.innerHTML = `
+            <div class="entry1">
+                <h3>${name} ${servingText}</h3>
+                <p>Calories: <strong id="bold-entries">${calories}</strong>&nbsp;&nbsp;</p>
+                <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp;&nbsp;</p>
+                <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp;&nbsp;</p>
+                <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp;&nbsp;</p>
+                <p>Sugar: <strong id="bold-entries">${sugar}g</strong>&nbsp;&nbsp;</p>
+                <p>Fiber: <strong id="bold-entries">${fiber}g</strong>&nbsp;&nbsp;</p>
+                <button class="btn entry-delete-button" onclick="deleteEntry(this)"><span>Delete Entry</span></button>
+            </div>
+            <hr class="entries-line">
+        `;
+        recentEntriesList.prepend(entryDiv);
+    }
