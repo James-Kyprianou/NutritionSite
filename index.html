@@ -80,6 +80,19 @@
                             <button class="btn" id="apply-button" type="submit" ><span>Apply</span></button>
                         </form>
                     </div>
+                    <div id="overlay"></div>
+
+                    <div class="popup" id="customPopup">
+                        <div class="popup-content">
+                            <span class="popup-close" onclick="closeCustomPopup()">&times;</span>
+                            <h2 id="duplicateNameErrorTitle">Error</h2>
+                            <h3 id="duplicateNameErrorSubTitle">Duplicate Name</h3><br>
+                            <p id="popupMessage">The name <span id="duplicateName"></span> is already in your entries list.</p>
+                            <p id="duplicateNameSub">Please enter a different name.</p>
+                        </div>
+                    </div>
+
+
                     <div id="confirmationBox" class="confirmation-box">
                         <div class="confirmation-content">
                             <h2 id="confirmationTitle"></h2>
@@ -226,8 +239,10 @@
                     <form action="#" method="post" onsubmit="handleSubmit(event)">
                         <div style="display: flex;">
                             <div class="form-group">
-                                <label for="name-input" class="required-label">Name & Quantity:</label>
-                                <input type="text" id="name-input" name="name" placeholder="Quantity is optional..." maxlength="20" required>
+                                <div>
+                                    <label for="name-input" class="required-label">Name & Quantity:</label>
+                                    <input type="text" id="name-input" name="name" placeholder="Quantity is optional..." maxlength="20" required>
+                                </div>
                             </div>
                     
                             <div class="form-group">
