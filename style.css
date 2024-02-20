@@ -89,6 +89,9 @@ h3 {
     color: var(--main-text);
     width: calc(200px + 30vw) !important;
 }
+
+
+/* Common button styles */
 .btn, .btn2 {
     align-items: center;
     background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
@@ -113,28 +116,78 @@ h3 {
     cursor: pointer;
     transition: all .3s;
 }
-.btn:active, .btn2:active,
-.btn:hover, .btn2:hover {
- outline: 0;
- transform: scale(1.05);
+
+/* Hover effect for non-touch devices (e.g., desktops, laptops) */
+@media (hover: hover) {
+    .btn:hover, .btn2:hover {
+        outline: 0;
+        transform: scale(1.05);
+    }
+    
+    .btn:hover span, .btn2:hover span {
+        background: none;
+    }
 }
-.btn span, .btn2  span {
- background-color: rgb(5, 6, 45);
- padding: 16px 24px;
- border-radius: 6px;
- width: 100%;
- height: 100%;
- transition: 300ms;
+
+/* Active state for all devices */
+.btn:active, .btn2:active {
+    outline: 0;
+    transform: scale(1.05);
 }
+
+/* Clicked state for all devices */
+.btn.clicked, .btn2.clicked {
+    transform: scale(1.05);
+}
+
+/* Styles for the clicked state */
+.btn.clicked span, .btn2.clicked span {
+    background: none;
+}
+
+/* Additional styling for span elements */
+.btn span, .btn2 span {
+    background-color: rgb(5, 6, 45);
+    padding: 16px 24px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+}
+
 .btn2 span {
     padding: 16px 18.5px;
-}  
-.btn:hover span, .btn2:hover span {
- background: none;
 }
-.btn:active,.btn2:active {
- transform: scale(0.9);
-}
+/* Hover effect duration only for mobile devices */
+@media only screen and (max-width: 1200px) {
+    .btn:active, .btn2:active {
+        outline: 0;
+        transform: scale(1.05);
+    }
+
+    .btn.clicked, .btn2.clicked {
+        transform: scale(1.05);
+    }
+
+    .btn.clicked span, .btn2.clicked span {
+        background: none;
+    }
+
+    .btn span, .btn2 span {
+        background-color: rgb(5, 6, 45);
+        padding: 16px 24px;
+        border-radius: 6px;
+        width: 100%;
+        height: 100%;
+        transition: 300ms;
+    }
+
+    .btn2 span {
+        padding: 16px 18.5px;
+    }
+} 
+
+
 #submit-button {
     background-image: linear-gradient(144deg,#40ffa6, #59d390 50%,#00DDEB);
     min-width: 140px;
