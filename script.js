@@ -2,6 +2,7 @@ function openInfoPopup() {
     var popup = document.getElementById("info-popup");
     if (popup) {
         popup.style.display = "block";
+        document.getElementById("overlay").style.display = "block";
     }
 }
 
@@ -9,6 +10,7 @@ function closeInfoPopup() {
     var popup = document.getElementById("info-popup");
     if (popup) {
         popup.style.display = "none";
+        document.getElementById("overlay").style.display = "none";
     }
 }
 
@@ -258,19 +260,24 @@ window.addEventListener('load', checkPopupDisplayed);
 
 
 
-    function openPopup() {
-        document.getElementById('popup').style.display = 'block';
-    }
-    function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-    }
+function openPopup() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
 
     function openResetConfirmation() {
         document.getElementById('resetConfirmation').style.display = 'block';
+        document.getElementById("overlay").style.display = "block";
     }
 
     function closeResetConfirmation() {
         document.getElementById('resetConfirmation').style.display = 'none';
+        document.getElementById("overlay").style.display = "none";
     }
 
 // Function to reset all values and entries
@@ -320,7 +327,6 @@ const defaultMaxValues = {
     fiber: 30
 };
 
-// Function to load values from localStorage and populate the recent entries list
 function loadValuesFromStorage() {
     const macros = ["calories", "protein", "fats", "carbs", "sugar", "fiber"];
     macros.forEach(macroName => {
@@ -345,8 +351,13 @@ function loadValuesFromStorage() {
     // Populate the recent entries list
     const recentEntriesList = document.getElementById("recentEntriesList");
     recentEntriesList.innerHTML = ''; // Clear the list first
+    const existingEntryNames = new Set(); // Keep track of existing entry names
     entries.forEach(entry => {
-        createRecentEntry(entry.name, entry.servingSize, entry.calories, entry.protein, entry.fats, entry.carbs, entry.sugar, entry.fiber);
+        // Check if the entry already exists in the list
+        if (!existingEntryNames.has(entry.name)) {
+            createRecentEntry(entry.name, entry.servingSize, entry.calories, entry.protein, entry.fats, entry.carbs, entry.sugar, entry.fiber);
+            existingEntryNames.add(entry.name); // Add the entry name to the set
+        }
     });
 
     // Populate the popup form fields with previous responses
@@ -374,7 +385,6 @@ function loadValuesFromStorage() {
         // If there are entries, hide the placeholder
         noEntriesPlaceholder.style.display = 'none';
     }
-
 }
 
 // Call loadValuesFromStorage when the page loads
@@ -390,7 +400,7 @@ function loadRecentEntries() {
     });
 }
 
-//Function to create and append a recent entry
+// Function to create and append a recent entry
 function createRecentEntry(name, servingSize, calories, protein, fats, carbs, sugar, fiber) {
     // Save the entry to localStorage
     const entry = {
@@ -408,33 +418,41 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
     entries.unshift(entry); // Add entry to the beginning of the array
     localStorage.setItem('entries', JSON.stringify(entries));
 
-    // Append the entry to the recent entries list
+    // Append the entry to the recent entries list if it's not already present
     const recentEntriesList = document.getElementById("recentEntriesList");
-    const entryDiv = document.createElement("div");
-    entryDiv.classList.add("entry");
-    entryDiv.innerHTML = `
-        <div class="entry1">
-            <h3>${name} (${servingSize}g)&nbsp&nbsp</h3>
-            <p>Calories: <strong id="bold-entries">${calories}</strong>&nbsp&nbsp</p>
-            <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp&nbsp</p>
-            <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp&nbsp</p>
-            <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp&nbsp</p>
-            <p>Sugar: <strong id="bold-entries">${sugar}g</strong>&nbsp&nbsp</p>
-            <p>Fiber: <strong id="bold-entries">${fiber}g</strong>&nbsp&nbsp</p>
-            <button class="btn entry-delete-button" onclick="deleteEntry(this)"><span>Delete Entry</span></button>
-        </div>
-        <hr class="entries-line">
-    `;
-    recentEntriesList.prepend(entryDiv); // Add entry to the beginning of the list
-
-    // Add event listener to the dynamically generated delete button
-    const deleteButtons = document.querySelectorAll('.entry-delete-button');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Scroll to the bottom of the page
-            window.scrollTo(0, document.body.scrollHeight);
-        });
+    const existingEntry = Array.from(recentEntriesList.querySelectorAll('.entry')).find(entry => {
+        const entryName = entry.querySelector('h3').textContent.split(' ')[0];
+        const entryServingSize = parseInt(entry.querySelector('h3').textContent.split('(')[1].split('g')[0]);
+        return entryName === name && entryServingSize === servingSize;
     });
+
+    if (!existingEntry) {
+        const entryDiv = document.createElement("div");
+        entryDiv.classList.add("entry");
+        entryDiv.innerHTML = `
+            <div class="entry1">
+                <h3>${name} (${servingSize}g)&nbsp&nbsp</h3>
+                <p>Calories: <strong id="bold-entries">${calories}</strong>&nbsp&nbsp</p>
+                <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp&nbsp</p>
+                <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp&nbsp</p>
+                <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp&nbsp</p>
+                <p>Sugar: <strong id="bold-entries">${sugar}g</strong>&nbsp&nbsp</p>
+                <p>Fiber: <strong id="bold-entries">${fiber}g</strong>&nbsp&nbsp</p>
+                <button class="btn entry-delete-button" onclick="deleteEntry(this)"><span>Delete Entry</span></button>
+            </div>
+            <hr class="entries-line">
+        `;
+        recentEntriesList.prepend(entryDiv); // Add entry to the beginning of the list
+
+        // Add event listener to the dynamically generated delete button
+        const deleteButtons = document.querySelectorAll('.entry-delete-button');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Scroll to the bottom of the page
+                window.scrollTo(0, document.body.scrollHeight);
+            });
+        });
+    }
 
     // Update the charts
     updateCharts();
@@ -482,6 +500,7 @@ function deleteEntry(button) {
     // Show the confirmation box
     const confirmationBox = document.getElementById('confirmationBox');
     confirmationBox.style.display = 'flex';
+    document.getElementById("overlay").style.display = "block";
 
     // Function to confirm deletion
     window.confirmDeleteEntry = function() {
@@ -523,6 +542,7 @@ function deleteEntry(button) {
 function closeConfirmationBox() {
     const confirmationBox = document.getElementById('confirmationBox');
     confirmationBox.style.display = 'none';
+    document.getElementById("overlay").style.display = "none";
 }
 
 // Get form values
@@ -550,6 +570,19 @@ function handleSubmit(event) {
         let carbs = parseInt(document.getElementById("carbs-input").value) || 0;
         let sugar = parseInt(document.getElementById("sugar-input").value) || 0;
         let fiber = parseInt(document.getElementById("fiber-input").value) || 0;
+
+       // Check if the entry already exists in the recent entries list
+       const existingEntry = Array.from(document.querySelectorAll('.entry')).find(entry => {
+        const entryName = entry.querySelector('h3').textContent.split(' ')[0];
+        return entryName === name;
+    });
+
+    if (existingEntry) {
+        // If the entry already exists, show a custom popup
+        document.getElementById('duplicateName').textContent = name;
+        openCustomPopup();
+        return; // Exit the function to prevent further execution
+    }
 
         // Update card values and store them in localStorage
         updateCardAndStorage("calories", calories);
@@ -616,9 +649,18 @@ function handleSubmit(event) {
 
     closePopup();
 }
+function openCustomPopup() {
+    document.getElementById('customPopup').style.display = 'block';
+    document.getElementById("overlay").style.display = "block";
+}
 
+function closeCustomPopup() {
+    document.getElementById('customPopup').style.display = 'none';
+    document.getElementById("overlay").style.display = "none";
+}
 // Function to close all popups
 function closeAllPopups() {
+    
     closePopup(); // Close the main popup
     closeResetConfirmation(); // Close the reset confirmation popup
     closeConfirmationBox(); // Close the deletion confirmation popup
@@ -666,17 +708,19 @@ $(document).ready(function() {
         
         function displayFoodDetails(foodData) {
             var html = '<ul>';
-                $.each(foodData, function(index, food) {
-                    html += '<div class="food-details-name-sep"><div class="food-details-name"><li>Food Name: ' + food.name + '</li></div></div>';
-                    html += '<div class="food-details-serving"><li>Serving Size: <strong>' + food.serving_size_g + 'g</strong></li> <hr class="food-details-lines"></div>';
-                    html += '<div class="food-details-sep"><li>Calories: <strong>' + food.calories + 'g</strong></li></div>';
-                    html += '<div class="food-details-sep"><li>Protein: <strong>' + food.protein_g + 'g</strong></li></div>';
-                    html += '<div class="food-details-sep"><li>Fat: <strong>' + food.fat_total_g + 'g</strong></li></div>';
-                    html += '<div class="food-details-sep"><li>Carbohydrates: <strong>' + food.carbohydrates_total_g + '</strong>g</li></div>';
-                    html += '<div class="food-details-sep"><li>Sugar: <strong>' + food.sugar_g + 'g</strong></li></div>';
-                    html += '<div class="food-details-sep"><li>Fiber: <strong>' + food.fiber_g + 'g</strong></li></div>';
-                });
+            $.each(foodData, function(index, food) {
+                html += '<div class="food-details-name-sep"><div class="food-details-name"><li>Food Name: ' + food.name + '</li></div></div>';
+                html += '<div class="food-details-serving"><li>Serving Size: <strong>' + food.serving_size_g + 'g</strong></li> <hr class="food-details-lines"></div>';
+                html += '<div class="food-details-sep"><li>Calories: <strong>' + Math.floor(food.calories) + '</strong></li></div>';
+                html += '<div class="food-details-sep"><li>Protein: <strong>' + food.protein_g + 'g</strong></li></div>';
+                html += '<div class="food-details-sep"><li>Fat: <strong>' + food.fat_total_g + 'g</strong></li></div>';
+                html += '<div class="food-details-sep"><li>Carbohydrates: <strong>' + food.carbohydrates_total_g + '</strong>g</li></div>';
+                html += '<div class="food-details-sep"><li>Sugar: <strong>' + food.sugar_g + 'g</strong></li></div>';
+                html += '<div class="food-details-sep"><li>Fiber: <strong>' + food.fiber_g + 'g</strong></li></div>';
+            });
             html += '</ul>';
             $('#food-details').html(html);
         }
     });
+
+
