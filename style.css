@@ -45,7 +45,7 @@ h3 {
     height: calc(10px + 0.8vw);
     margin-left: 20px;
     transition: all .2s;
-    filter: grayscale(75%);
+    filter: grayscale(25%);
 }
 .info-icon:hover { 
     filter: brightness(125%);
@@ -54,14 +54,13 @@ h3 {
     cursor: pointer;
 }
 .home-icon {
-    width: calc(15px + 2vw);
-    height: calc(15px + 2vw);
+    width: calc(28px + 2vw);
+    height: calc(28px + 2vw);
     transition: all .2s;
-    filter: invert(95%);
-    margin-right: 20px;
+    margin-right: 15px;
 }
 .home-icon:hover { 
-    filter: invert(75%);
+    filter: invert(20%);
     transform: scale(1.05);
     cursor: pointer;
 }
@@ -141,13 +140,6 @@ h3 {
     min-width: 140px;
     line-height: 0.5em;
     margin: 0 0 20px 12px;
-}
-#goals-button {
-    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-    line-height: calc(11px + 0.4vw);
-    max-width: calc(12px + 6.5vw);
-    min-width: calc(12px + 6.5vw);
-    font-size: calc(8px + 0.7vw);
 }
 #reset-button {
     background-image: linear-gradient(144deg,#ffa640, #d37159 50%,rgb(235, 47, 0));
@@ -281,9 +273,80 @@ td {
 .container .content .cards {
     padding: 15px 15px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 10px;
+}
+
+.container .content .cards .card {
+    max-width: 280px !important; 
+
+}
+
+@media screen and (max-width: 1800px) {
+    .container .content .cards .card {
+        max-width: 600px !important; 
+    }
+    .card-max-values, #calories-value, #protein-value, #fats-value, #carbs-value, #sugar-value, #fiber-value {
+        font-size: calc(12px + 0.9vw) !important;
+    }
+    .card-titles {
+        font-size: calc(12px + 0.9vw) !important;
+    }
+    .card-titles, .card-max-values, #calories-value, #protein-value, #fats-value, #carbs-value, #sugar-value, #fiber-value {
+        margin-left: calc(-100px + 2vw);
+    }
+
+}
+@media screen and (max-width: 1550px) {
+    .card-titles, .card-max-values, #calories-value, #protein-value, #fats-value, #carbs-value, #sugar-value, #fiber-value {
+        margin-left: calc(-50px + 2vw);
+    }
+    .chart-icon {
+        top: 24px !important;  
+        left: 24px !important; 
+        width: 50px !important;
+    }
+    .calories-icon {
+        top: 22px !important; 
+        left: 29px !important; 
+        width: 40px !important; 
+    }
+}
+@media screen and (max-width: 1150px) {
+    .card-titles, .card-max-values, #calories-value, #protein-value, #fats-value, #carbs-value, #sugar-value, #fiber-value {
+        margin-left: calc(-10px + 2vw);
+    }
+
+    .chart-icon {
+        top: 30px !important;  
+        left: 30px !important; 
+        width: 50px !important;
+    }
+    .calories-icon {
+        top: 28px !important; 
+        left: 34px !important; 
+        width: 40px !important; 
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .container .content .cards {
+        padding: 15px 15px;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    #calories-value, #protein-value, #fats-value, #carbs-value, #sugar-value, #fiber-value {
+        font-size: calc(12px + 0.5vw);
+    }
+    .card-titles {
+        font-size: calc(12px + 0.5vw);
+        margin-right: 55px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
 }
 
 .container .content .card {
@@ -392,7 +455,6 @@ td {
     width: calc(60px + 2.5vw);
     height: calc(60px + 2.5vw);
 }
-/*margin: -80px 0px 0px 28px !important;*//*margin: -80px 0px 0px 28px !important;*//*margin: -80px 0px 0px 28px !important;*//*margin: -80px 0px 0px 28px !important;*/
 .chart-icon, .calories-icon {
     position: absolute;
     height: auto;
@@ -467,7 +529,7 @@ a:visited {
 .search-food {
     flex: 2.2;
     background: var(--background-colour);
-    min-height: 50vh;
+    min-height: 1vh;
     margin: -5px 25px 0px 25px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 8px !important;
@@ -533,7 +595,11 @@ a:visited {
     transition: background-color 0.1s ease-out !important;
 }
 
-
+.serving-text {
+    font-size: 18px;
+    font-weight: normal;
+    color: #bac5df;
+}
 
 .entry1 {
     display: flex;
@@ -570,11 +636,15 @@ a:visited {
     background-image: linear-gradient(144deg,#ff4040, #d39a59 50%,rgb(235, 47, 0));
     line-height: 0.2em;
     max-width: 10%;
-    font-size: 16px;
+    font-size:  16px;
     margin-top: 10px;
     margin-left: 15px;
     margin-right: 15px;
 }
+.no-entries-text {
+    font-size: 20px;
+}
+
 #bold-entries {
     font-size: 21px;
 }
@@ -647,9 +717,15 @@ a:visited {
     transition: background-color 0.1s ease-out !important;
 }
 .add-new {
-    padding-bottom: calc(1px + 1.4vw)
+    padding-bottom: calc(1px + 0.9vw)
 }
 /* Add Food */
+
+.add-new-food-sub {
+    color: #bac5df;
+    margin: 5px 0 0 10px;
+    font-size: 15px;
+}
 .add-food-text {
     margin-left: 10px;
     font-size: 15px;
@@ -956,28 +1032,51 @@ footer {
 
 }
 
-
-
-
-@media screen and (max-width: 1900px) { 
-    #goals-button {
-     background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-     line-height: calc(11px + 0.4vw);
-     max-width: calc(12px + 15vw);
-     min-width: calc(12px + 15vw);
-     margin-right: 15px;
-     font-weight: bold;
-     margin: 7.5px 12px;
- }
- #reset-button {
-     background-image: linear-gradient(144deg,#ffa640, #d37159 50%,rgb(235, 47, 0));
-     line-height: calc(11px + 0.4vw);
-     max-width: calc(12px + 15vw);
-     min-width: calc(12px + 15vw);
-     font-weight: bold;
-     margin: 7.5px 12px;
- }
+#goals-button {
+    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
 }
+#reset-button {
+    background-image: linear-gradient(144deg,#ffa640, #d37159 50%,rgb(235, 47, 0));
+}
+#goals-button, #reset-button {
+    line-height: calc(11px + 0.4vw);
+    min-width: calc(12px + 7vw);
+    max-width: calc(12px + 7vw);
+    font-size: calc(1px + 1.2vw);
+    text-align: center;
+}
+
+@media screen and (max-width: 1400px) {
+    #goals-button,
+    #reset-button {
+        max-width: calc(12px + 12vw);
+        min-width: calc(12px + 12vw);
+        margin: 7.5px 12px;
+        font-weight: bold;
+        font-size: calc(8px + 0.7vw);
+    }
+    
+    #goals-button {
+        margin-right: 15px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #goals-button,
+    #reset-button {
+        max-width: calc(12px + 15vw);
+        min-width: calc(12px + 15vw);
+        margin: 7.5px 12px;
+        font-weight: bold;
+        font-size: calc(8px + 0.7vw);
+    }
+    
+    #goals-button {
+        margin-right: 15px;
+    }
+}
+
+
 @media screen and (max-width: 1200px) {
     .recent-entries {
         margin-top: 50px !important;
@@ -993,7 +1092,7 @@ footer {
 }
 
 .search-food {
-    order: 2;
+    order: 3;
 }
 
 .add-new {
@@ -1004,30 +1103,49 @@ footer {
     order: 3;
 }
 
+@media screen and (max-width: 770px) { 
+    .search-food {
+        order: 2;
+    }
+    
+    .add-new {
+        order: 1;
+    }
+    
+    .recent-entries {
+        order: 3;
+    }
 
+}
+@media screen and (max-width: 900px) { 
+.recent-entries .entry1 {
+    flex-direction: column;
+    align-items: flex-start;
+    }   
+}
 
 @media screen and (max-width: 770px) { 
 
     .calories-icon {
-        top: 18px; 
-        left: calc(10px + 4.5vw);
-        width: 26px; 
+        top: 18px !important; 
+        left: calc(10px + 4.5vw) !important;
+        width: 26px !important; 
     }
     .chart-icon {
-        top: 20px;  
-        left: 40px; 
-        width: 36px;
+        top: 20px !important;  
+        left: 40px !important; 
+        width: 36px !important;
     }
-
+/*
     .container .content .cards {
         justify-content: space-evenly;
     }
-
+*/
     .main-title {
         margin-left: -10px;
     }
     .info-icon {
-        margin-left: 8px;
+        margin-left: 5px;
     }
     .container {
         flex-direction: row;
@@ -1105,11 +1223,7 @@ footer {
     #chart-calories, #chart-protein, #chart-fats, #chart-carbs, #chart-sugar, #chart-fiber {
         margin-left: 20px !important;
     }
-    .recent-entries .entry1 {
-        flex-direction: column;
-        align-items: flex-start; /* Adjust alignment as needed */
-        
-    }
+
     
     .container .content .cards .card {
         width: calc(100px + 20vw) !important;
@@ -1273,14 +1387,14 @@ footer {
         padding: 16px 12px;
     }
     .calories-icon {
-        top: 13px; 
-        left: calc(18px + 4.5vw);
-        width: 23px; 
+        top: 13px !important; 
+        left: calc(18px + 4.5vw) !important;
+        width: 23px !important; 
     }
     .chart-icon {
-        top: 13px; 
-        left: calc(13px + 4.5vw);
-        width: 33px; 
+        top: 13px !important; 
+        left: calc(13px + 4.5vw) !important;
+        width: 33px !important; 
     }
 
     .brand-name h1 {
@@ -1298,3 +1412,11 @@ footer {
         display: none;
     }
 }
+
+
+
+
+
+
+
+
