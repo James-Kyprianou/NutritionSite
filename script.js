@@ -294,6 +294,9 @@ function resetValues() {
     localStorage.removeItem('entries');
     updateCharts()
 
+    entryNames = [];
+    localStorage.removeItem('entryNames');
+
     // Remove all entries from the recent entries list
     const recentEntriesList = document.getElementById("recentEntriesList");
     recentEntriesList.innerHTML = '';
@@ -553,6 +556,9 @@ let carbsMaxInput = parseInt(document.getElementById("carbs-max-input").value) |
 let sugarMaxInput = parseInt(document.getElementById("sugar-max-input").value) || 0;
 let fiberMaxInput = parseInt(document.getElementById("fiber-max-input").value) || 0;
 
+// Initialize entryNames array with existing entry names from localStorage
+let entryNames = JSON.parse(localStorage.getItem('entryNames')) || [];
+
 function handleSubmit(event) {
     event.preventDefault(); // Prevent form submission
 
@@ -562,7 +568,7 @@ function handleSubmit(event) {
 
     if (isAddNewForm) {
         // This is the "Add New" form
-        let name = document.getElementById("name-input").value;
+        let name = document.getElementById("name-input").value.trim(); // Trim removes leading and trailing spaces
         let servingSize = parseInt(document.getElementById("serving-size-input").value) || 0;
         let calories = parseInt(document.getElementById("calories-input").value) || 0;
         let protein = parseInt(document.getElementById("protein-input").value) || 0;
@@ -571,18 +577,13 @@ function handleSubmit(event) {
         let sugar = parseInt(document.getElementById("sugar-input").value) || 0;
         let fiber = parseInt(document.getElementById("fiber-input").value) || 0;
 
-       // Check if the entry already exists in the recent entries list
-       const existingEntry = Array.from(document.querySelectorAll('.entry')).find(entry => {
-        const entryName = entry.querySelector('h3').textContent.split(' ')[0];
-        return entryName === name;
-    });
-
-    if (existingEntry) {
-        // If the entry already exists, show a custom popup
-        document.getElementById('duplicateName').textContent = name;
-        openCustomPopup();
-        return; // Exit the function to prevent further execution
-    }
+        // Check if the entry already exists in the entryNames array
+        if (entryNames.includes(name)) {
+            // If the entry already exists, show a custom popup
+            document.getElementById('duplicateName').textContent = name;
+            openCustomPopup();
+            return; // Exit the function to prevent further execution
+        }
 
         // Update card values and store them in localStorage
         updateCardAndStorage("calories", calories);
@@ -594,6 +595,9 @@ function handleSubmit(event) {
         updateCharts()
         // Create and append a recent entry
         createRecentEntry(name, servingSize, calories, protein, fats, carbs, sugar, fiber);
+
+        // Add the new entry name to the entryNames array
+        entryNames.push(name);
     } else if (isSetGoalForm) {
         // This is the "Set Goal" form
         let caloriesMaxInput = parseInt(document.getElementById("calories-max-input").value) || 0;
@@ -604,26 +608,25 @@ function handleSubmit(event) {
         let fiberMaxInput = parseInt(document.getElementById("fiber-max-input").value) || 0;
 
         // Check if any input value is 0 or empty, set default max value to 100
-    if (caloriesMaxInput === 0 || isNaN(caloriesMaxInput)) {
-        caloriesMaxInput = 2000;
-    }
-    if (proteinMaxInput === 0 || isNaN(proteinMaxInput)) {
-        proteinMaxInput = 60;
-    }
-    if (fatsMaxInput === 0 || isNaN(fatsMaxInput)) {
-        fatsMaxInput = 65;
-    }
-    if (carbsMaxInput === 0 || isNaN(carbsMaxInput)) {
-        carbsMaxInput = 300;
-    }
-    if (sugarMaxInput === 0 || isNaN(sugarMaxInput)) {
-        sugarMaxInput = 35;
-    }
-    if (fiberMaxInput === 0 || isNaN(fiberMaxInput)) {
-        fiberMaxInput = 25;
-    }
+        if (caloriesMaxInput === 0 || isNaN(caloriesMaxInput)) {
+            caloriesMaxInput = 2000;
+        }
+        if (proteinMaxInput === 0 || isNaN(proteinMaxInput)) {
+            proteinMaxInput = 60;
+        }
+        if (fatsMaxInput === 0 || isNaN(fatsMaxInput)) {
+            fatsMaxInput = 65;
+        }
+        if (carbsMaxInput === 0 || isNaN(carbsMaxInput)) {
+            carbsMaxInput = 300;
+        }
+        if (sugarMaxInput === 0 || isNaN(sugarMaxInput)) {
+            sugarMaxInput = 35;
+        }
+        if (fiberMaxInput === 0 || isNaN(fiberMaxInput)) {
+            fiberMaxInput = 25;
+        }
 
- 
         // Update max value elements
         document.getElementById("calories-max").textContent = "/" + caloriesMaxInput;
         document.getElementById("protein-max").textContent = "/" + proteinMaxInput;
@@ -641,13 +644,25 @@ function handleSubmit(event) {
         localStorage.setItem("fiberMax", fiberMaxInput.toString());
 
         updateCharts()
-
     }
+
+    // Save updated entryNames array to localStorage
+    localStorage.setItem('entryNames', JSON.stringify(entryNames));
 
     // Reset the form
     event.target.reset();
 
     closePopup();
+}
+// Function to check for duplicate entry
+function isDuplicateEntry(name) {
+    let entries = document.querySelectorAll(".entry-name");
+    for (let entry of entries) {
+        if (entry.innerText.trim() === name.trim()) {
+            return true; // Found a duplicate
+        }
+    }
+    return false; // No duplicate found
 }
 function openCustomPopup() {
     document.getElementById('customPopup').style.display = 'block';
