@@ -14,11 +14,11 @@
         <div class="header">
             <div class="nav">
                 <a href="index.html">
-                    <img src="images/home-icon.png" class="home-icon" alt="Home Icon">
-                </a>
+                    <img src="images/home-icon.png" class="home-icon" alt="Home Icon" draggable="false">
+                
                 <div class="search">
-                    <h2 class="main-title">Dashboard</h2>
-                    <img src="images/info-icon.png" class="info-icon" alt="Info Icon" onclick="openInfoPopup()">
+                    <h2 class="main-title">Dashboard</h2></a>
+                    <img src="images/info-icon.png" class="info-icon" alt="Info Icon" onclick="openInfoPopup()" draggable="false">
                 <div id="info-popup" class="info-popup">
                     <p class="info-title">How To Use</p>
                     <p class="info-subtitle">Setting Goals:</p><br>
@@ -27,6 +27,7 @@
                     <p class="info-paragraph">Once your goal is set up, simply add new foods to track. The only required input is the food name; entering individual macros and serving size are optional. At the start of your new day, press the reset button to clear all values (this doesn't reset your goals for each day).</p><br>
                     <p class="info-subtitle">Track your progress:</p><br>
                     <p class="info-paragraph">As you add foods, the charts & values in each card for macros and the food entries will populate with your data. If you make a mistake entering macros for a food, simply delete the entry and re-enter the correct information.</p><br>
+                    <p class="card-arrangement-text">Note: If you wish to change the arrangement of the cards, simply hold/click down on a card and drag and drop it onto another card to swap their positions.</p><br>
                     <p class="info-title">The Nutrition API</p>
                     <a href="https://api-ninjas.com/api/nutrition" class="info-subtitle underline-text1" target="_blank">API Ninjas</a>
                     <p class="info-paragraph"><br>The "Search For Food" feature uses the <a href="https://api-ninjas.com/api/nutrition" class="underline-text1" target="_blank">API Ninjas Nutrition API</a> which allows you to search for any food. You can search for food in specifies quantities or in grams.  
@@ -122,51 +123,44 @@
         </div>
         <div class="content">
             <div class="cards" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="card1">
-                <div class="card" draggable="true" ondragstart="drag(event)">
+                <div class="card1 card" draggable="true" ondragstart="drag(event)">
                     <div class="box">
                         <h3 class="card-titles">Calories</h3><br>
                         <h1 id="calories-value">g</h1>
                         <h1 class="card-max-values" id="calories-max"></h1>
                     </div>
                       <div class="chart-container">
-                        <img src="images/calories-icon.png" alt="Calories Icon" class="calories-icon">
+                        <img src="images/calories-icon.png" alt="Calories Icon" class="calories-icon" draggable="false">
                         <canvas id="chart-calories" width="100" height="100"></canvas>
                     </div>
                 <div class="card-line calories"></div>
                 </div>
             </div>
-            </div>
-            <div class="card2">
-                <div class="card" draggable="true" ondragstart="drag(event)">
+                <div class="card2 card" draggable="true" ondragstart="drag(event)">
                     <div class="box">
                         <h3 class="card-titles">Protein</h3><br>
                         <h1 id="protein-value">g</h1>
                         <h1 class="card-max-values" id="protein-max"></h1> 
                     </div>
                     <div class="chart-container">
-                        <img src="images/protein-icon.png" alt="Protein Icon" class="chart-icon">
+                        <img src="images/protein-icon.png" alt="Protein Icon" class="chart-icon" draggable="false">
                     <canvas id="chart-protein" width="100" height="100"></canvas>
                 </div>
                 <div class="card-line protein"></div>
                 </div>
-            </div>
-                <div class="card3">
-                <div class="card" draggable="true" ondragstart="drag(event)">
+                <div class="card3 card" draggable="true" ondragstart="drag(event)">
                     <div class="box">
                         <h3 class="card-titles">Fats</h3><br>
                         <h1 id="fats-value">g</h1>
                         <h1 class="card-max-values" id="fats-max"></h1> 
                     </div>
                     <div class="chart-container">
-                        <img src="images/fats-icon.png" alt="Fats Icon" class="chart-icon">
+                        <img src="images/fats-icon.png" alt="Fats Icon" class="chart-icon" draggable="false">
                     <canvas id="chart-fats" width="100" height="100"></canvas>
                 </div>
                 <div class="card-line fats"></div>
                 </div>
-                </div>
-                <div class="card4">
-                <div class="card" draggable="true" ondragstart="drag(event)">
+                <div class="card4 card" draggable="true" ondragstart="drag(event)">
                     <div class="box">
                         <h3 class="card-titles">Carbs</h3><br>
                         <h1 id="carbs-value">g</h1>
@@ -174,13 +168,11 @@
                     </div>
                     <div class="chart-container">
                     <canvas id="chart-carbs" width="100" height="100"></canvas>
-                    <img src="images/carbs-icon.png" alt="Carbs Icon" class="chart-icon">
+                    <img src="images/carbs-icon.png" alt="Carbs Icon" class="chart-icon" draggable="false">
                 </div>
                 <div class="card-line carbs"></div>
                 </div>
-                </div>
-                <div class="card5">
-                <div class="card" draggable="true" ondragstart="drag(event)">
+                <div class="card5 card" draggable="true" ondragstart="drag(event)">
                     <div class="box">
                         <h3 class="card-titles">Sugar</h3><br>
                         <h1 id="sugar-value">g</h1>
@@ -188,13 +180,11 @@
                     </div>
                     <div class="chart-container">
                     <canvas id="chart-sugar" width="100" height="100"></canvas>
-                    <img src="images/sugar-icon.png" alt="Sugar Icon" class="chart-icon">
+                    <img src="images/sugar-icon.png" alt="Sugar Icon" class="chart-icon" draggable="false">
                 </div>
                 <div class="card-line sugar"></div>
                 </div>
-                </div>
-                <div class="card6">
-                <div class="card" draggable="true" ondragstart="drag(event)">
+                <div class="card6 card" draggable="true" ondragstart="drag(event)">
                     <div class="box">
                         <h3 class="card-titles">Fiber</h3><br>
                         <h1 id="fiber-value">g</h1>
@@ -202,11 +192,10 @@
                     </div>
                     <div class="chart-container">
                     <canvas id="chart-fiber" width="100" height="100"></canvas>
-                    <img src="images/fiber-icon.png" alt="Fiber Icon" class="chart-icon">
+                    <img src="images/fiber-icon.png" alt="Fiber Icon" class="chart-icon" draggable="false">
                 </div>
                 <div class="card-line fiber"></div>
                 </div>
-            </div>
 
             <div class="content-2">
 
@@ -215,7 +204,7 @@
                         <h2>Today's Entries</h2>
                     </div>
                     <div class="entry1" id="no-entries-placeholder">
-                        <p class="no-entries-text">No entries</p><button class="btn entry-delete-button" id="btn-placeholder-colour" onclick="deleteEntry(this)"><span></span></button>
+                        <p class="no-entries-text">No entries</p><button class="btn entry-delete-button" id="btn-placeholder-hidden-button" onclick="deleteEntry(this)"><span></span></button>
                     </div>
                     <div id="recentEntriesList"></div>
                 </div>
@@ -233,7 +222,7 @@
                 <div class="add-new">
                     <div class="title">
                         <h2>Add New Food</h2>
-                    </div><p class="add-food-text">If you prefer not to add something, leave the search field blank. <br></p>
+                    </div><p class="add-food-text">If you prefer not to add something, leave the input field blank. <br></p>
                     <p class="add-new-food-sub">Only the food name is required.</p>
                     <br>
                     <form action="#" method="post" onsubmit="handleSubmit(event)">
@@ -286,57 +275,10 @@
                                 <input type="number" id="fiber-input" name="fiber" placeholder="Enter fiber..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
                             </div>
                         </div>
-                        <button class="btn" id="submit-button" type="submit"><span>Add Food</span></button>
+                        <button class="btn" id="submit-button" type="submit" ><span>Add Food</span></button>
                     </form>
-                </div>     
-                    <!--
-<div id="popup" class="popup">
-    <span class="close" onclick="closePopup()">&times;</span>
-    <h2 class="goals-popup-title">Set Your Daily Macro Targets</h2><br>
-    <p>If you prefer not to track something, set its value as 0.</p>
-    <br>
+                </div>   
 
-    <form action="#" method="post" onsubmit="handleSubmit(event)">
-        <div style="display: flex;">
-            <div class="form-group">
-                <label for="calories-max-input">Calories:</label>
-                <input type="number" id="calories-max-input" name="calories-max" placeholder="Enter calories...">
-            </div>
-    
-            <div class="form-group">
-                <label for="protein-max-input">Protein:</label>
-                <input type="number" id="protein-max-input" name="protein-max" placeholder="Enter protein...">
-            </div>
-        </div>
-    
-        <div style="display: flex;">
-            <div class="form-group">
-                <label for="fats-max-input">Fats:</label>
-                <input type="number" id="fats-max-input" name="fats-max" placeholder="Enter fats...">
-            </div>
-    
-            <div class="form-group">
-                <label for="carbs-max-input">Carbs:</label>
-                <input type="number" id="carbs-max-input" name="carbs-max" placeholder="Enter carbs...">
-            </div>
-        </div>
-    
-        <div style="display: flex;">
-            <div class="form-group">
-                <label for="sugar-max-input">Sugar:</label>
-                <input type="number" id="sugar-max-input" name="sugar-max" placeholder="Enter sugar..." required>
-            </div>
-    
-            <div class="form-group">
-                <label for="fiber-max-input">Fiber:</label>
-                <input type="number" id="fiber-max-input" name="fiber-max" placeholder="Enter fiber..." required>
-            </div>
-        </div>
-
-    
-        <button class="btn" id="apply-button" type="submit" ><span>Apply</span></button>
-    </form>
-</div>    -->
 <div id="confirmationBox" class="confirmation-box">
     <div class="confirmation-content">
         <h2 id="confirmationTitle"></h2>
@@ -362,10 +304,11 @@
 </body>
 <footer>
     <div class="footer-content">
+        <a href="https://api-ninjas.com/api/nutrition" target="_blank">Nutrition API</a>
         <p></p>
         <ul>
-            <li><a href="https://api-ninjas.com/api/nutrition" target="_blank">Nutrition API</a></li>
             <li><a href="mailto:jameskyprianou@gmail.com">Contact</a></li>
+            <li><a onclick="openInfoPopup()" class="help-link">Details</a></li>
         </ul>
     </div>
     <div class="footer-bottom">
