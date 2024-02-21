@@ -275,7 +275,7 @@ td {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 14px 16px rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
 .container .header .nav {
@@ -333,10 +333,37 @@ td {
 
 .container .content .cards .card {
     max-width: 280px !important; 
-
+    box-shadow: 10px 14px 16px rgba(0, 0, 0, 0.4);
 }
 
-@media screen and (max-width: 1800px) {
+.chart-container {
+    margin-left: -25px;
+}
+
+@media screen and (max-width: 1900px) {
+.container .content .cards .card {
+    max-width: 250px !important; 
+    box-shadow: 10px 14px 16px rgba(0, 0, 0, 0.4);
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    #calories-value, .card-titles, #calories-max, #protein-max, #protein-value {
+        margin-left: 10px !important;
+    }
+}
+.recent-entries {
+    box-shadow: 10px 14px 16px rgba(0, 0, 0, 0.4);
+}
+.search-food {
+    box-shadow: 10px 14px 16px rgba(0, 0, 0, 0.4);
+}
+.add-new {
+    box-shadow: 10px 14px 16px rgba(0, 0, 0, 0.4);
+}
+
+@media screen and (max-width: 1700px) {
+
     .container .content .cards .card {
         max-width: 600px !important; 
     }
@@ -513,14 +540,14 @@ td {
     height: auto;
 }
 .calories-icon {
-    top: 28px; 
-    left: 34px; 
+    top: 24px; 
+    left: 33px; 
     width: 40px; 
    /* margin: 21px 0 0 27px !important;*/
 }
 .chart-icon {
-    top: 30px;  
-    left: 30px; 
+    top: 28.5px;  
+    left: 27.5px; 
     width: 50px;
     /*margin: -80px 0px 0px 28px !important;*/
 }
@@ -584,7 +611,6 @@ a:visited {
     background: var(--background-colour);
     min-height: 1vh;
     margin: -5px 25px 0px 25px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 8px !important;
     padding: 0 20px 45px 20px;
     transition: transform 0.3s ease;
@@ -618,8 +644,10 @@ a:visited {
     font-size: 16px;
 }
 
-#btn-placeholder-colour {
+#btn-placeholder-hidden-button {
     opacity: 0 !important;
+    cursor: default !important;
+    pointer-events: none;
 }
 
 .recent-entries {
@@ -743,7 +771,6 @@ a:visited {
     flex: 5;
     background: var(--background-colour);
     margin: 0 25px 25px 25px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: flex;
     flex-direction: column;
     border-radius: 8px !important;
@@ -753,7 +780,6 @@ a:visited {
     background: var(--background-colour);
     min-height: 50vh;
     margin: -5px 25px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: flex;
     flex-direction: column;
     border-radius: 8px !important;
@@ -917,9 +943,11 @@ input[type="submit"] {
     color: #bac5df;
     font-size: 14px !important;
 }
+.card-arrangement-text {
+    color: #bac5df;
+}
 
-
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1200px) {
     .goals-paragraph {
         font-size: 13px;
     }
@@ -948,8 +976,45 @@ input[type="submit"] {
         color: #bac5df;
         font-size: 10px !important;
     }
+    .card-arrangement-text {
+        color: #bac5df;
+        font-size: 13px;
+    }
 }
-
+@media screen and (max-width: 380px) {
+    .goals-paragraph {
+        font-size: 11px;
+    }
+    
+    .goals-sub-paragraph {
+        margin-top: 10px;
+        color: #bac5df;
+        font-size: 9px;
+    }
+    
+    .info-title {
+        font-size: 22px;
+        font-weight: bold;
+    }
+    
+    .info-subtitle {
+        font-size: 17px;
+        color: #bac5df !important;
+    }
+    
+    .info-paragraph {
+        font-size: 10px;
+    }
+    
+    .info-sub-paragraph {
+        color: #bac5df;
+        font-size: 8px !important;
+    }
+    .card-arrangement-text {
+        color: #bac5df;
+        font-size: 11px;
+    }
+}
 
 
 /* Footer */
@@ -959,11 +1024,18 @@ footer {
     background-color: var(--background-colour);
     color: #fff;
     padding: 20px;
+    box-shadow: 0px -10px 16px rgba(0, 0, 0, 0.3);
+
 }
 .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.footer-content ul li a:hover,
+.help-link:hover {
+    color: #bac5df;
+    cursor: pointer;
 }
 .footer-content p {
     margin: 0;
@@ -991,23 +1063,121 @@ footer {
 /* Animations */
 
 .content-2 {
-    animation: slide-in 0.4s forwards;
+    animation: slide-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.1s forwards;
+    opacity: 0;
 }
 .search-food {
-    animation: slide-in 0.5s forwards;
+    animation: slide-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.1s forwards;
+    opacity: 0;
 }
 .add-new {
-    animation: slide-in 0.6s forwards;
+    animation: slide-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.1s forwards;
+    opacity: 0;
 }
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+@keyframes swapAnimation {
+    0% {
+        transform: translateY(-10px); /* Move up slightly */
+    }
+    50% {
+        transform: translateY(10px); /* Move down slightly */
+    }
+    100% {
+        transform: translateY(0); /* Back to original position */
+    }
+}
+
+@keyframes shrinkAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes shakeAnimation {
+    0% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    100% {
+        transform: translateX(-5px);
+    }
+}
+
+
+
+
 .box {
-    animation: fade-in 0.6s ease-in-out;
+    animation: fade-in 1s ease-in-out;
 }
 .icon, .chart-container {
-    animation: fade-in 0.6s ease-in-out;
+    animation: fade-in 1s ease-in-out;
 }
-.entry1:hover {
+/* Slide in animation: slide-in 0.7s forwards;*/
 
+
+
+
+/*
+.card1 {
+    animation: slide-and-rotate 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
+
+.card2 {
+    animation: slide-and-rotate 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.1s forwards;
+}
+
+.card3 {
+    animation: slide-and-rotate 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+}
+
+.card4 {
+    animation: slide-and-rotate 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.3s forwards;
+}
+
+.card5 {
+    animation: slide-and-rotate 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.4s forwards;
+}
+
+.card6 {
+    animation: slide-and-rotate 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.5s forwards;
+}
+*/
+.cards {
+    animation: slide-from-top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    opacity: 0;
+}
+
+@keyframes slide-from-top {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
 
 /* Fade in. animation: fade-in 0.2s ease-in-out;*/
 @keyframes fade-in {
@@ -1032,22 +1202,15 @@ footer {
   }
 
 
-/* Slide in animation: slide-in 0.7s forwards;*/
-@keyframes slide-in {
-    from {
-      opacity: 0;
-      transform: translateY(100px);
-    } to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+
 
 /* Adjustments for smaller screens */
 
+/*
 .card1 {
     display: none;
 }
+*/
 
 @media screen and (max-width: 9900px) {
     #calories-icon {
@@ -1132,7 +1295,7 @@ footer {
 
 @media screen and (max-width: 1200px) {
     .recent-entries {
-        margin-top: 50px !important;
+        margin-top: 0px !important;
     }
     .chart-container {
         width: calc(60px + 3.5vw);
@@ -1156,7 +1319,25 @@ footer {
     order: 3;
 }
 
-@media screen and (max-width: 770px) { 
+@media screen and (max-width: 950px) {  
+    .calories-icon {
+        top: 21px !important; 
+        left: 27px !important; 
+        width: 35px !important; 
+    }
+    .chart-icon {
+        top: 25px !important;  
+        left: 23px !important; 
+        width: 45px !important;
+    }
+}
+@media screen and (max-width: 770px) {  
+    .container .content .cards .card {
+        width: calc(100px + 20vw) !important;
+        height: calc(50px + 13vw) !important;
+    }
+}
+@media screen and (max-width: 825px) { 
     .search-food {
         order: 2;
     }
@@ -1169,6 +1350,9 @@ footer {
         order: 3;
     }
 
+    .recent-entries {
+        margin-top: 50px !important;
+    }
 }
 @media screen and (max-width: 900px) { 
 .recent-entries .entry1 {
@@ -1278,10 +1462,7 @@ footer {
     }
 
     
-    .container .content .cards .card {
-        width: calc(100px + 20vw) !important;
-        height: calc(50px + 13vw) !important;
-    }
+
     /*
     .container .content .cards .card {
         width: 180px; 
