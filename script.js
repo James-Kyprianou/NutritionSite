@@ -46,6 +46,13 @@ function drop(event) {
         } else {
             target.parentNode.insertBefore(dragged, target);
         }
+
+        // Apply animation to the dragged card
+        dragged.style.animation = 'swapAnimation 1s ease';
+        // Reset animation after 1 second
+        setTimeout(function() {
+            dragged.style.animation = '';
+        }, 1000);
     } else {
         container.appendChild(dragged);
     }
@@ -430,36 +437,6 @@ function createRecentEntry(name, servingSize, calories, protein, fats, carbs, su
 
     appendRecentEntryToDOM(name, servingSize, calories, protein, fats, carbs, sugar, fiber);
 
-/*
-    // Append the entry to the recent entries list if it's not already present
-    const recentEntriesList = document.getElementById("recentEntriesList");
-    const existingEntry = Array.from(recentEntriesList.querySelectorAll('.entry')).find(entry => {
-        const entryName = entry.querySelector('h3').textContent.split(' ')[0];
-        const entryServingSize = parseInt(entry.querySelector('h3').textContent.split('(')[1].split('g')[0]);
-        return entryName === name && entryServingSize === servingSize;
-    });
-
-    if (!existingEntry) {
-        const entryDiv = document.createElement("div");
-        entryDiv.classList.add("entry");
-        entryDiv.innerHTML = `
-            <div class="entry1">
-                <h3>${name} (${servingSize}g)&nbsp&nbsp</h3>
-                <p>Calories: <strong id="bold-entries">${calories}</strong>&nbsp&nbsp</p>
-                <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp&nbsp</p>
-                <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp&nbsp</p>
-                <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp&nbsp</p>
-                <p>Sugar: <strong id="bold-entries">${sugar}g</strong>&nbsp&nbsp</p>
-                <p>Fiber: <strong id="bold-entries">${fiber}g</strong>&nbsp&nbsp</p>
-                <button class="btn entry-delete-button" onclick="deleteEntry(this)"><span>Delete Entry</span></button>
-            </div>
-            <hr class="entries-line">
-        `;
-        recentEntriesList.prepend(entryDiv); // Add entry to the beginning of the list
-
-        */
-    
-
     // Update the charts
     updateCharts();
 
@@ -750,27 +727,7 @@ $(document).ready(function() {
             $('#food-details').html(html);
         }
     });
-    /*
-    function appendRecentEntryToDOM(name, servingSize, calories, protein, fats, carbs, sugar, fiber) {
-        const recentEntriesList = document.getElementById("recentEntriesList");
-        const entryDiv = document.createElement("div");
-        entryDiv.classList.add("entry");
-        const servingText = servingSize ? `(${servingSize}g)&nbsp&nbsp` : "(N/A)&nbsp&nbsp";
-        entryDiv.innerHTML = `
-            <div class="entry1">
-                <h3>${name} ${servingText}</h3>
-                <p>Calories: <strong id="bold-entries">${calories}</strong>&nbsp&nbsp</p>
-                <p>Protein: <strong id="bold-entries">${protein}g</strong>&nbsp&nbsp</p>
-                <p>Fats: <strong id="bold-entries">${fats}g</strong>&nbsp&nbsp</p>
-                <p>Carbs: <strong id="bold-entries">${carbs}g</strong>&nbsp&nbsp</p>
-                <p>Sugar: <strong id="bold-entries">${sugar}g</strong>&nbsp&nbsp</p>
-                <p>Fiber: <strong id="bold-entries">${fiber}g</strong>&nbsp&nbsp</p>
-                <button class="btn entry-delete-button" onclick="deleteEntry(this)"><span>Delete Entry</span></button>
-            </div>
-            <hr class="entries-line">
-        `;
-        recentEntriesList.prepend(entryDiv);
-    }*/
+
     function appendRecentEntryToDOM(name, servingSize, calories, protein, fats, carbs, sugar, fiber) {
         const recentEntriesList = document.getElementById("recentEntriesList");
         const entryDiv = document.createElement("div");
@@ -806,3 +763,5 @@ $(document).ready(function() {
             });
         });
     });
+
+    
