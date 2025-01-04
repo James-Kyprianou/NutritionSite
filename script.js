@@ -20,8 +20,18 @@ function closeInfoPopup() {
     }
 }
 
-var dragged;
 
+
+
+
+
+
+
+
+
+
+var dragged;
+ 
 function drag(event) {
     dragged = event.target;
     // Set data to be transferred during the drag
@@ -31,7 +41,7 @@ function drag(event) {
 function allowDrop(event) {
     event.preventDefault();
 }
-
+ 
 function drop(event) {
     event.preventDefault();
     var target = event.target.closest('.card');
@@ -70,26 +80,40 @@ document.querySelectorAll('.card').forEach((card, index) => {
     card.addEventListener('dragend', saveCardOrder);
 });
 
-// Function to save the order of the cards in localStorage
 function saveCardOrder() {
     const cardOrder = Array.from(document.querySelectorAll('.card')).map(card => card.id);
     localStorage.setItem('cardOrder', JSON.stringify(cardOrder));
 }
 
-// Function to retrieve the stored card order from localStorage and rearrange the cards accordingly
+
+window.addEventListener('load', () => {
+    loadCardOrder();  // Load the card order on page load
+    document.querySelector('.cards').style.display = 'flex'; // Ensure flex is applied
+});
+
 function loadCardOrder() {
     const cardOrder = JSON.parse(localStorage.getItem('cardOrder'));
+    const container = document.querySelector('.cards');
+
     if (cardOrder) {
-        const container = document.querySelector('.cards');
+        // Apply saved order
         cardOrder.forEach(cardId => {
             const card = document.getElementById(cardId);
-            // Instead of appending the card ID, append the card itself
             if (card) {
                 container.appendChild(card);
             }
         });
+    } else {
+        // If no saved order, set a default order (current DOM order)
+        const defaultOrder = Array.from(container.children); // Get the current order of cards
+        defaultOrder.forEach(card => {
+            container.appendChild(card); // Reorder the cards as per their current position
+        });
+        // Optionally, save this default order to localStorage
+        saveCardOrder();
     }
 }
+
 
 const cards = document.querySelectorAll('.card');
 let draggedCard = null;
@@ -336,12 +360,12 @@ function updateCardAndStorage(macroName, value) {
 
 // Set default max values for calories, protein, fats, carbs, sugar, and fiber
 const defaultMaxValues = {
-    calories: 2100,
+    calories: 2000,
     protein: 80,
-    fats: 50,
-    carbs: 250,
+    fats: 90,
+    carbs: 220,
     sugar: 30,
-    fiber: 30
+    fiber: 25
 };
 
 function loadValuesFromStorage() {
@@ -602,21 +626,21 @@ function handleSubmit(event) {
             caloriesMaxInput = 2000;
         }
         if (proteinMaxInput === 0 || isNaN(proteinMaxInput)) {
-            proteinMaxInput = 60;
+            proteinMaxInput = 80;
         }
         if (fatsMaxInput === 0 || isNaN(fatsMaxInput)) {
-            fatsMaxInput = 65;
+            fatsMaxInput = 90;
         }
         if (carbsMaxInput === 0 || isNaN(carbsMaxInput)) {
-            carbsMaxInput = 300;
-        }
+            carbsMaxInput = 220;
+        } 
         if (sugarMaxInput === 0 || isNaN(sugarMaxInput)) {
-            sugarMaxInput = 35;
+            sugarMaxInput = 30;
         }
         if (fiberMaxInput === 0 || isNaN(fiberMaxInput)) {
             fiberMaxInput = 25;
         }
-
+ 
         // Update max value elements
         document.getElementById("calories-max").textContent = "/" + caloriesMaxInput;
         document.getElementById("protein-max").textContent = "/" + proteinMaxInput;
