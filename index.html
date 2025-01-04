@@ -22,9 +22,9 @@
                 <div id="info-popup" class="info-popup">
                     <p class="info-title">How To Use</p>
                     <p class="info-subtitle">Setting Goals:</p><br>
-                    <p class="info-paragraph">First you need to set your goals. If you don't, defualt values will be set. The goals you set will become the total amount of each macro you can consume each day (change your goals any time).</p><br>
+                    <p class="info-paragraph">First you need to set your goals. If you don't, defualt values will be set. The goals you set will become the goal amount of each macro you consume each day.</p><br>
                     <p class="info-subtitle">Adding food & reset the day:</p><br>
-                    <p class="info-paragraph">Once your goal is set up, simply add new foods to track. The only required input is the food name; entering individual macros and serving size are optional. At the start of your new day, press the reset button to clear all values (this doesn't reset your goals for each day).</p><br>
+                    <p class="info-paragraph">Once your goals are set, simply add new foods to track. The only required input is the food name; entering individual macros and serving size are optional. At the start of your new day, press the reset button to clear all values (this doesn't reset your goals).</p><br>
                     <p class="info-subtitle">Track your progress:</p><br>
                     <p class="info-paragraph">As you add foods, the charts & values in each card for macros and the food entries will populate with your data. If you make a mistake entering macros for a food, simply delete the entry and re-enter the correct information.</p><br>
                     <p class="card-arrangement-text">Note: If you wish to change the arrangement of the cards, simply hold/click down on a card and drag and drop it onto another card to swap their positions.</p><br>
@@ -36,15 +36,16 @@
                     </div>
                     <div id="popup" class="popup">
                         <span class="close" onclick="closePopup()">&times;</span>
-                        <h2 class="goals-popup-title">Set Your Daily Macro Targets</h2><br>
-                        <p class="goals-paragraph">If not tracking something, leave input blank or enter 0 and default values will be provided.</p>
-                        <p class="goals-sub-paragraph">Defualt values may not meet your required macros.</p>
+                        <h2 class="goals-popup-title">Set Your Daily Nutritional Targets</h2><br>
+                        <p class="goals-paragraph">If not tracking a nutritional value, leave the input blank or enter 0 and default values will be provided.</p>
+                        <p class="goals-sub-paragraph">*Default values might not align with your specific macros and are only an estimate.</p>
+                        <p class="macro-calc-text">If you're unsure of your macros, try this calculator: <a href="https://www.calculator.net/macro-calculator.html" target="_blank" style="color: #bac5df; text-decoration: underline;">https://www.calculator.net/macro-calculator.html</a></p>
                         <br>
                         <form action="#" method="post" onsubmit="handleSubmit(event)">
                             <div style="display: flex;">
                                 <div class="form-group">
                                     <label for="calories-max-input">Calories:</label>
-                                    <input type="number" id="calories-max-input" name="calories-max" placeholder="Enter calories...">
+                                    <input type="number" id="calories-max-input" name="calories-max" min="0" placeholder="Enter calories...">
                                 </div>
                         
                                 <div class="form-group">
@@ -55,7 +56,7 @@
                         
                             <div style="display: flex;">
                                 <div class="form-group">
-                                    <label for="fats-max-input">Fats:</label>
+                                    <label for="fats-max-input">Fat:</label>
                                     <input type="number" id="fats-max-input" name="fats-max" placeholder="Enter fats...">
                                 </div>
                         
@@ -76,7 +77,7 @@
                                     <input type="number" id="fiber-max-input" name="fiber-max" placeholder="Enter fiber...">
                                 </div>
                             </div>
-                        
+                        <br>
                             <button class="btn" id="apply-button" type="submit" ><span>Apply</span></button>
                         </form>
                     </div>
@@ -109,7 +110,7 @@
                                 <h2 class="new-day-popup-title">New Day Confirmation</h2>
                                 <br>
                                 <div class="new-day-popup-text">Are you sure you want to start a new day? </div>
-                                <p class="new-day-popup-space"> This will reset the data from your previous day. 
+                                <p class="new-day-popup-space"> This will reset the data from your current day. 
                                 </p>
                                 <br>
                                 <button class="btn" id="reset-button2" onclick="resetValues()"><span>Reset</span></button>
@@ -150,7 +151,7 @@
                 </div>
                 <div class="card3 card" draggable="true" ondragstart="drag(event)">
                     <div class="box">
-                        <h3 class="card-titles">Fats</h3><br>
+                        <h3 class="card-titles">Fat</h3><br>
                         <h1 id="fats-value">g</h1>
                         <h1 class="card-max-values" id="fats-max"></h1> 
                     </div>
@@ -222,57 +223,57 @@
                 <div class="add-new">
                     <div class="title">
                         <h2>Add New Food</h2>
-                    </div><p class="add-food-text">If you prefer not to add something, leave the input field blank. <br></p>
-                    <p class="add-new-food-sub">Only the food name is required.</p>
+                    </div><p class="add-food-text">If you prefer not to add a nutritional value, leave the input field blank. <br></p>
+                    <p class="add-new-food-sub">*Only the food name is required.</p>
                     <br>
                     <form action="#" method="post" onsubmit="handleSubmit(event)">
                         <div style="display: flex;">
                             <div class="form-group">
                                 <div>
-                                    <label for="name-input" class="required-label">Name & Quantity:</label>
-                                    <input type="text" id="name-input" name="name" placeholder="Quantity is optional..." maxlength="20" required>
+                                    <label for="name-input" class="required-label">Name:</label>
+                                    <input type="text" id="name-input" name="name" placeholder="Food name..." maxlength="20" min="0" required>
                                 </div>
                             </div>
                     
                             <div class="form-group">
                                 <label for="serving-size-input">Grams/Serving:</label>
-                                <input type="number" id="serving-size-input" name="serving-size" placeholder="Serving size (g)..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
+                                <input type="number" id="serving-size-input" name="serving-size" placeholder="Serving size (g)..." max="9999" min="0" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
                             </div>
                         </div>
 
                         <div style="display: flex;">
                             <div class="form-group">
                                 <label for="calories-input">Calories:</label>
-                                <input type="number" id="calories-input" name="calories" placeholder="Enter calories..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
+                                <input type="number" id="calories-input" name="calories" placeholder="Calories..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
                             </div>
                     
                             <div class="form-group">
                                 <label for="protein-input">Protein:</label>
-                                <input type="number" id="protein-input" name="protein" placeholder="Enter protein..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
+                                <input type="number" id="protein-input" name="protein" placeholder="Protein..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
                             </div>
                         </div>
                     
                         <div style="display: flex;">
                             <div class="form-group">
-                                <label for="fats-input">Fats:</label>
-                                <input type="number" id="fats-input" name="fats" placeholder="Enter fats..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
+                                <label for="fats-input">Fat:</label>
+                                <input type="number" id="fats-input" name="fats" placeholder="Fat..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
                             </div>
                     
                             <div class="form-group">
                                 <label for="carbs-input">Carbs:</label>
-                                <input type="number" id="carbs-input" name="carbs" placeholder="Enter carbs..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
+                                <input type="number" id="carbs-input" name="carbs" placeholder="Carbs..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
                             </div>
                         </div>
                     
                         <div style="display: flex;">
                             <div class="form-group">
                                 <label for="sugar-input">Sugar:</label>
-                                <input type="number" id="sugar-input" name="sugar" placeholder="Enter sugar..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
+                                <input type="number" id="sugar-input" name="sugar" placeholder="Sugar..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
                             </div>
                     
                             <div class="form-group">
                                 <label for="fiber-input">Fiber:</label>
-                                <input type="number" id="fiber-input" name="fiber" placeholder="Enter fiber..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
+                                <input type="number" id="fiber-input" name="fiber" placeholder="Fiber..." max="9999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3">
                             </div>
                         </div>
                         <button class="btn" id="submit-button" type="submit" ><span>Add Food</span></button>
@@ -295,7 +296,7 @@
             <h2 class="new-day-popup-title">New Day Confirmation</h2>
             <br>
             <div class="new-day-popup-text">Are you sure you want to start a new day? </div>
-            <p class="new-day-popup-space"> This will reset the data from your previous day. 
+            <p class="new-day-popup-space"> This will reset your current day. 
             </p>
             <br>
             <button class="btn" id="reset-button2" onclick="resetValues()"><span>Reset</span></button>
